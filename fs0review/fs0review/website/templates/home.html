@@ -1,32 +1,28 @@
 <!-- home.html -->
 
-{% extends "base.html" %}
-
-{% block title %}Home{% endblock %}
-
-{% block content %}
+{% extends "base.html" %} {% block title %}Home{% endblock %} {% block content %}
 <h1 align="center">fs0review tool</h1>
 
 <!-- Display feature details -->
 {% for feature_detail in feature_details %}
 <div class="feature-detail">
-  <h3>{{ feature_detail.feature }}</h3>
-  <p>{{ feature_detail.value }}</p>
-  <p>Mandatory Reviewers: {{ feature_detail.mandatory_reviewer }}</p>
-  <p>Review Summary: {{ feature_detail.mandatory_review_status }}</p>
+    <h3>{{ feature_detail.feature }}</h3>
+    <p>{{ feature_detail.value }}</p>
+    <p>Mandatory Reviewers: {{ feature_detail.mandatory_reviewer }}</p>
+    <p>Review Summary: {{ feature_detail.mandatory_review_status }}</p>
 </div>
 {% endfor %}
 
 <!-- Add the button with dropdown -->
 <div class="dropdown">
-  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
     Select an option
   </button>
-  <div class="dropdown-menu">
-    <a class="dropdown-item" href="#">Option 1</a>
-    <a class="dropdown-item" href="#">Option 2</a>
-    <a class="dropdown-item" href="#">Option 3</a>
-  </div>
+    <div class="dropdown-menu" style="flex:auto">
+        <a class="dropdown-item" href="#">Option 1</a>
+        <a class="dropdown-item" href="#">Option 2</a>
+        <a class="dropdown-item" href="#">Option 3</a>
+    </div>
 </div>
 
 {% endblock %}
