@@ -162,7 +162,7 @@
             <div class="container-fluid" style="margin-top:50px">
                 <div class="container">
                     <div class="text-box">
-                        Sign off
+                        Review Summary
                     </div>
                     <div class="content review">
                         <input type="email" placeholder="review summary" class="input" id="reviewSummaryInput" style="background-color:green">
@@ -174,242 +174,285 @@
 
 
         <div class="column2">
-            <h3 style="padding-left:100px">Feature Details</h3>
+            <h3 style="padding-left:100px">Review Tool</h3>
 
             <div class="container-fluid" style="margin-top:50px">
-                <div class="container">
-                    <div class="text-box">
-                        Review start
-                    </div>
-                    <div class="content">
-                        <input type="start date" placeholder="start date" class="input" id="startDateInput2">
-                    </div>
+                <div class="container" style="padding-left:60px">
+                    <button class="btn btn-primary" id="registerButton">Register</button>
+
                 </div>
-                <div class="container">
-                    <div class="text-box">
-                        Review end
-                    </div>
-                    <div class="content">
-                        <input type="end date" placeholder="end date" class="input" id="endDateInput2">
-                    </div>
+                <div class="container" style="padding-left:60px">
+                    <button class="btn btn-primary" id="registerButton">Update Reviewers</button>
+
+                </div>
+                <div class="container" style="padding-left:60px">
+                    <button class="btn btn-primary" id="registerButton">Draft Email</button>
+
+                </div>
+                <div class="container" style="padding-left:60px">
+                    <button class="btn btn-primary" id="registerButton">Check Review Status</button>
+
+                </div>
+                <h3 style="padding-left:60px">Reviewers To be Added?</h3>
+                <div class="radio-group" style="padding-left: 100px;">
+                    <label>
+                      <input type="radio" name="option" checked> YES
+                    </label>
+                    <label>
+                      <input type="radio" name="option"> NO
+                    </label>
+
                 </div>
             </div>
 
             <div class="container-fluid" style="margin-top:50px">
+                <h3 style="padding-left:60px">Conditional Reviewers Selector</h3>
                 <div class="container">
-                    <div class="text-box">
-                        Primary TM
-                    </div>
-                    <div class="content">
-                        <input type="email" placeholder="xyz@nokia.com" class="input" id="primaryTMInput2">
+                    <div class="checkbox-group">
+                        <label>
+                          <input type="checkbox"> Comp1
+                        </label>
+                        <label>
+                          <input type="checkbox"> Comp2
+                        </label>
                     </div>
                 </div>
                 <div class="container">
-                    <div class="text-box">
-                        Sign off
+                    <div class="checkbox-group">
+                        <label>
+                          <input type="checkbox"> Comp3
+                        </label>
+                        <label>
+                          <input type="checkbox"> Comp4
+                        </label>
                     </div>
-                    <div class="content">
-                        <label for="dropdown8">dropdown here</label>
-                        <select id="dropdown8">
-                        <option value=""></option>
-                        <option value="option1">Option 1</option>
-                        <option value="option2">Option 2</option>
-                        <option value="option3">Option 3</option>
-                    </select>
+                </div>
+                <div class="container">
+                    <div class="checkbox-group">
+                        <label>
+                          <input type="checkbox"> Comp5
+                        </label>
+                        <label>
+                          <input type="checkbox"> Comp6
+                        </label>
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="checkbox-group" style="padding-left:77px">
+                        <label>
+                          <input type="checkbox"> Comp7
+                        </label>
+
                     </div>
                 </div>
             </div>
 
-            <div class="container-fluid" style="margin-top:50px">
-                <div class="container">
-                    <div class="text-box">
-                        Sign off
-                    </div>
-                    <div class="content review">
-                        <input type="email" placeholder="review summary" class="input" id="reviewSummaryInput2" style="background-color:green">
-                    </div>
-                </div>
-            </div>
+
         </div>
 
         <div class="column3">
-            <h3 style="padding-left:100px">Feature Details</h3>
+            <h3 style="padding-left:100px">Mandatory Reviewers</h3>
             <div class="container-fluid">
                 <div class="container">
                     <div class="text-box">
-                        Review Type
+                        Technical Manager
                     </div>
                     <div class="content">
-                        <label for="dropdown1">New Review</label>
-                        <select id="dropdown1">
-                        <option value=""></option>
-                        <option value="option1">Option 1</option>
-                        <option value="option2">Option 2</option>
-                        <option value="option3">Option 3</option>
-                    </select>
+                        <input type="start date" placeholder="" class="input" id="startDateInput">
                     </div>
                     <div class="text-box">
-                        Review Type
+                        Reviewed/To be Reviewed
                     </div>
                 </div>
                 <div class="container">
                     <div class="text-box">
-                        Title
+                        RA Lead(4G)
                     </div>
                     <div class="content">
-                        P01:Review tool online
+                        <input type="start date" placeholder="" class="input" id="startDateInput">
                     </div>
                     <div class="text-box">
-                        Title
+                        Reviewed/To be Reviewed
                     </div>
                 </div>
 
                 <div class="container">
                     <div class="text-box">
-                        Owner
+                        RA Lead(5G)
                     </div>
                     <div class="content">
-                        xyz@nokia.com
+                        <input type="start date" placeholder="" class="input" id="startDateInput">
+
                     </div>
                     <div class="text-box">
-                        Owner
+                        Reviewed/To be Reviewed
                     </div>
                 </div>
                 <div class="container">
                     <div class="text-box">
-                        Category
+                        FS1TA Owner
                     </div>
                     <div class="content">
-                        <label for="dropdown2">label </label>
-                        <select id="dropdown2">
-                        <option value=""></option>
-                        <option value="option1">Operability</option>
-                        <option value="option2">Option 2</option>
-                        <option value="option3">Option 3</option>
-                    </select>
+                        <input type="start date" placeholder="" class="input" id="startDateInput">
+
                     </div>
                     <div class="text-box">
-                        Category
+                        Reviewed/To be Reviewed
                     </div>
                 </div>
                 <div class="container">
                     <div class="text-box">
-                        Sol Area
+                        Guardian
                     </div>
                     <div class="content">
-                        <label for="dropdown3">Example</label>
-                        <select id="dropdown3">
-                        <option value=""></option>
-                        <option value="option1">Option 1</option>
-                        <option value="option2">Option 2</option>
-                        <option value="option3">Option 3</option>
-                    </select>
+                        <input type="start date" placeholder="" class="input" id="startDateInput">
+
                     </div>
                     <div class="text-box">
-                        Sol Area
+                        Reviewed/To be Reviewed
                     </div>
                 </div>
                 <div class="container">
                     <div class="text-box">
-                        Req Area
+                        System Architect
                     </div>
                     <div class="content">
-                        <label for="dropdown4">Example</label>
-                        <select id="dropdown4">
-                        <option value=""></option>
-                        <option value="option1">Option 1</option>
-                        <option value="option2">Option 2</option>
-                        <option value="option3">Option 3</option>
-                    </select>
+                        <input type="start date" placeholder="" class="input" id="startDateInput">
+
                     </div>
                     <div class="text-box">
-                        Req Area
+                        Reviewed/To be Reviewed
                     </div>
                 </div>
                 <div class="container">
                     <div class="text-box">
-                        Release
+                        Other Mandatory
                     </div>
                     <div class="content">
-                        <label for="dropdown5">Release label</label>
-                        <select id="dropdown5">
-                        <option value=""></option>
-                        <option value="option1">Option 1</option>
-                        <option value="option2">Option 2</option>
-                        <option value="option3">Option 3</option>
-                    </select>
+                        <input type="start date" placeholder="" class="input" id="startDateInput">
+
                     </div>
                     <div class="text-box">
-                        Release
+                        Reviewed/To be Reviewed
                     </div>
                 </div>
-                <div class="container">
-                    <div class="text-box">
-                        RAT
-                    </div>
-                    <div class="content">
-                        <label for="dropdown6">dropdown here</label>
-                        <select id="dropdown6">
-                        <option value=""></option>
-                        <option value="option1">Option 1</option>
-                        <option value="option2">Option 2</option>
-                        <option value="option3">Option 3</option>
-                    </select>
-                    </div>
-                    <div class="text-box">
-                        RAT
-                    </div>
-                </div>
+
             </div>
+            <h3 style="padding-left:100px"> Optional Reviewers</h3>
             <div class="container-fluid" style="margin-top:50px">
                 <div class="container">
                     <div class="text-box">
-                        Review start
+                        FST
                     </div>
                     <div class="content">
-                        <input type="start date" placeholder="start date" class="input" id="startDateInput">
+                        <input type="start date" placeholder="" class="input" id="startDateInput">
                     </div>
 
                 </div>
                 <div class="container">
                     <div class="text-box">
-                        Review end
+                        APO
                     </div>
                     <div class="content">
-                        <input type="end date" placeholder="end date" class="input" id="endDateInput">
+                        <input type="end date" placeholder="" class="input" id="endDateInput">
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="text-box">
+                        Other Optional
+                    </div>
+                    <div class="content">
+                        <input type="end date" placeholder="" class="input" id="endDateInput">
                     </div>
                 </div>
             </div>
 
-            <div class="container-fluid" style="margin-top:50px">
+            <div class="container-fluid">
+                <h3 style="padding-left:100px">Conditional Reviewers</h3>
                 <div class="container">
                     <div class="text-box">
-                        Primary TM
+                        Comp1
                     </div>
                     <div class="content">
-                        <input type="email" placeholder="xyz@nokia.com" class="input" id="primaryTMInput">
+                        <input type="start date" placeholder="" class="input" id="startDateInput">
                     </div>
                     <div class="text-box">
-                        Primary TM
+                        Reviewed/To be Reviewed
                     </div>
                 </div>
                 <div class="container">
                     <div class="text-box">
-                        Sign off
+                        Comp2
                     </div>
                     <div class="content">
-                        <label for="dropdown7">dropdown here</label>
-                        <select id="dropdown7">
-						<option value=""></option>
-						<option value="option1">Option 1</option>
-						<option value="option2">Option 2</option>
-						<option value="option3">Option 3</option>
-					</select>
+                        <input type="start date" placeholder="" class="input" id="startDateInput">
                     </div>
                     <div class="text-box">
-                        Sign off
+                        Reviewed/To be Reviewed
                     </div>
                 </div>
+
+                <div class="container">
+                    <div class="text-box">
+                        Comp3
+                    </div>
+                    <div class="content">
+                        <input type="start date" placeholder="" class="input" id="startDateInput">
+
+                    </div>
+                    <div class="text-box">
+                        Reviewed/To be Reviewed
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="text-box">
+                        Comp4
+                    </div>
+                    <div class="content">
+                        <input type="start date" placeholder="" class="input" id="startDateInput">
+
+                    </div>
+                    <div class="text-box">
+                        Reviewed/To be Reviewed
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="text-box">
+                        Comp5
+                    </div>
+                    <div class="content">
+                        <input type="start date" placeholder="" class="input" id="startDateInput">
+
+                    </div>
+                    <div class="text-box">
+                        Reviewed/To be Reviewed
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="text-box">
+                        Comp6
+                    </div>
+                    <div class="content">
+                        <input type="start date" placeholder="" class="input" id="startDateInput">
+
+                    </div>
+                    <div class="text-box">
+                        Reviewed/To be Reviewed
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="text-box">
+                        Comp7
+                    </div>
+                    <div class="content">
+                        <input type="start date" placeholder="" class="input" id="startDateInput">
+
+                    </div>
+                    <div class="text-box">
+                        Reviewed/To be Reviewed
+                    </div>
+                </div>
+
             </div>
 
 
