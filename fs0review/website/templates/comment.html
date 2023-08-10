@@ -15,13 +15,13 @@
     <header class="text-gray-400 bg-gray-800 body-font">
         <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
           <a class="flex title-font font-medium items-center text-white mb-4 md:mb-0">
-            <img src="fs0.PNG" fill="none" stroke="currentColor" stroke-linecap="rectangle" stroke-linejoin="round" stroke-width="0" class="w-46 h-12 text-white p-0 bg-blue-400 rectangle-full" viewBox="0 45 24 24">
+            <img src="{{ url_for('static', filename='fs0.PNG') }}" fill="none" stroke="currentColor" stroke-linecap="rectangle" stroke-linejoin="round" stroke-width="0" class="w-46 h-12 text-white p-0 bg-blue-400 rectangle-full" viewBox="0 45 24 24">
               <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
             
             <span class="ml-3 text-xl"></span>
           </a>
           <nav class="md:ml-auto flex flex-wrap items-center text-base justify-center">
-            <a href = "home.html" class="mr-5 hover:text-white"><button CLASS="btn" >Review</a></button>
+            <a href = "/" class="mr-5 hover:text-white"><button CLASS="btn" >Review</a></button>
             <a href = "comment.html"class="mr-5 hover:text-white"><button CLASS="btn">Comment</a></button>
           </nav>
           <button class="inline-flex items-center bg-gray-800 border-0 py-1 px-1 focus:outline-none hover:bg-gray-700 rounded text-base mt-4 md:mt-0">MyAccount
@@ -225,6 +225,31 @@
             font-weight: bold;
           }
         </styles>
+
+        <script>
+          function addComment() {
+            var nameInput = document.getElementById("name-input");
+            var commentInput = document.getElementById("comment-input");
+            var nameText = nameInput.value.trim();
+            var commentText = commentInput.value.trim();
+        
+            if (nameText !== "" && commentText !== "") {
+                var commentList = document.getElementById("comment-list");
+                var newComment = document.createElement("li");
+                var userElement = document.createElement("span");
+                userElement.className = "comment-user";
+                userElement.innerText = nameText + ": ";
+                var contentElement = document.createElement("span");
+                contentElement.className = "comment-content";
+                contentElement.innerText = commentText;
+                newComment.appendChild(userElement);
+                newComment.appendChild(contentElement);
+                commentList.appendChild(newComment);
+                nameInput.value = "";
+                commentInput.value = "";
+            }
+        }
+        </script>
 </body>
 
 

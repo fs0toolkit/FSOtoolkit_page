@@ -18,15 +18,20 @@ def home():
 
     return render_template("home.html", user=current_user)
 
-@views.route('/comment', methods=['POST'])
+
+
+@views.route('/comment.html', methods=['GET', 'POST'])
 @login_required
 def comment():
     if request.method == 'POST': 
-        comment_text = request.form.get('comment')  # Gets the comment from the HTML
+        comment_text = request.form.get('comment-input')  # Change to match your HTML input name
 
-        new_comment = Comment(data=comment_text, user_id=current_user.id)  # Providing the schema for the comment
-        db.session.add(new_comment)  # Adding the comment to the database
-        db.session.commit()
-        flash('Comment added!', category='success')
+        if comment_text:  # Check if comment_text is not empty
+            new_comment = Comment(data=comment_text, user_id=current_user.id)
+            db.session.add(new_comment)
+            db.session.commit()
+            flash('Comment added!', category='success')
+        else:
+            flash('Comment cannot be empty!', category='error')
 
-    return render_template("home.html", user=current_user)
+    return render_template("comment.html", user=current_user)
