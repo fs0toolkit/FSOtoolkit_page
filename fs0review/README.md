@@ -1,7 +1,3 @@
-
-
-# FS0 Rewew tool
-
 # Flask Web App Tutorial
 
 ## Setup & Installation

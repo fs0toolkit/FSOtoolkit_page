@@ -1,14 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
     <title>FSO toolkit</title>
 </head>
 
+
 <body>
+    <header class="text-gray-400 bg-gray-800 body-font">
+        <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
+          <a class="flex title-font font-medium items-center text-white mb-4 md:mb-0">
+            <img src="fs0.PNG" fill="none" stroke="currentColor" stroke-linecap="rectangle" stroke-linejoin="round" stroke-width="0" class="w-46 h-12 text-white p-0 bg-blue-400 rectangle-full" viewBox="0 45 24 24">
+              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
+            
+            <span class="ml-3 text-xl"></span>
+          </a>
+          <nav class="md:ml-auto flex flex-wrap items-center text-base justify-center">
+            <a href = "home.html" class="mr-5 hover:text-white"><button CLASS="btn" >Review</a></button>
+            <a href = "comment.html"class="mr-5 hover:text-white"><button CLASS="btn">Comment</a></button>
+          </nav>
+          <button class="inline-flex items-center bg-gray-800 border-0 py-1 px-1 focus:outline-none hover:bg-gray-700 rounded text-base mt-4 md:mt-0">MyAccount
+            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" class="w-4 h-4 ml-1" viewBox="0 0 24 24">
+              <path d="M5 12h14M12 5l7 7-7 7"></path>
+            </svg>
+          </button>
+        </div>
+      </header>
+
     <div class="main">
         <div class="column1">
             <h3 style="padding-left:100px">Feature Details</h3>
@@ -18,12 +41,11 @@
                         Review Type
                     </div>
                     <div class="content">
-                        <label for="dropdown1">New Review</label>
+                        <label for="dropdown1"></label>
                         <select id="dropdown1">
                         <option value=""></option>
-                        <option value="option1">Option 1</option>
-                        <option value="option2">Option 2</option>
-                        <option value="option3">Option 3</option>
+                        <option value="option1">New Review</option>
+                        <option value="option2">Re-Review</option>
                     </select>
                     </div>
                 </div>
@@ -32,7 +54,7 @@
                         Title
                     </div>
                     <div class="content">
-                        P01:Review tool online
+                      <input type="start date" placeholder="P01:Review tool online" class="input" id="Titleinput">
                     </div>
                 </div>
                 <div class="container">
@@ -459,177 +481,179 @@
 
     </div>
 
+    <style>
+        .container {
+            display: flex;
+          }
+          
+          .text-box {
+            background-color: blue;
+            color: white;
+            padding: 10px;
+            width: 100px;
+            border: 2px solid black;
+          }
+          
+          .dropdown-container {
+            margin: 10px;
+          }
+          
+          .content {
+            border: 2px solid black;
+            padding: 10px;
+            width: 200px;
+          }
+          
+          .container-fluid {
+            margin-top: 10px;
+          }
+          
+          .review {
+            background-color: green;
+          }
+          
+          .main{
+            display:flex;
+            justify-content:center;
+          }
+          .column1,
+          .column2,
+          .column3{
+            margin-left:40px;
+            margin-right:40px;
+          }
+          
+          .btn {
+            width:200px;
+            padding: 12px 24px;
+            font-size: 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-bottom: 20px;
+          }
+          
+          .btn-primary {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            margin-right: 10px;
+          }
+          
+          .btn-primary:hover {
+            background-color: #0069d9;
+          }
+          
+          .btn-primary:active {
+            background-color: #0056b3;
+          }
+          .radio-group {
+            display: flex;
+            gap: 10px;
+            
+          }
+          
+          .checkbox-group {
+            display: flex;
+            gap: 10px;
+            justify-content:center;
+          }
+          
+          .checkbox-group label {
+            display: inline-block;
+            border: 2px solid #ccc;
+            padding: 5px 10px;
+            border-radius: 4px;
+            margin-left:50px;
+            margin-top:20px;
+          }
+          
+          .checkbox-group label input[type="checkbox"] {
+            margin-right: 5px;
+          }
+          
+          .checkbox-group label input[type="checkbox"]:checked {
+            background-color: #007bff;
+            color: #fff;
+          }
+          
+          
+          
+          
+          
+          
+          
+          
+          .containers {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+          }
+          
+          .card {
+            width: 80%;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            padding: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+          }
+          
+          .card-header {
+            background-color: #f4f4f4;
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
+            text-align: center;
+          }
+          
+          .card-body {
+            padding: 10px;
+            
+          }
+          
+          .card-body input[type="text"] {
+            width: 100%;
+            height: 30px;
+            padding: 5px;
+            font-size: 16px;
+            margin-bottom: 10px;
+          }
+          
+          .card-body button {
+            padding: 5px 10px;
+            font-size: 16px;
+          }
+          
+          .comments {
+            width: 95%;
+            text-align: justify;
+          }
+          
+          .comments h2 {
+            text-align: center;
+          }
+          
+          .comments ul {
+            list-style-type: none;
+            padding: 0;
+            width:100%;
+          }
+          
+          .comments li {
+            background-color: #f4f4f4;
+            padding: 10px;
+            margin-bottom: 10px;
+            width:100%;
+          }
+          
+          .comments li:last-child {
+            margin-bottom: 0;
+          }
+          .comment-user {
+            font-weight: bold;
+          }
+          </style>
+
 </body>
-<style>
-    .container {
-        display: flex;
-      }
-      
-      .text-box {
-        background-color: blue;
-        color: white;
-        padding: 10px;
-        width: 100px;
-        border: 2px solid black;
-      }
-      
-      .dropdown-container {
-        margin: 10px;
-      }
-      
-      .content {
-        border: 2px solid black;
-        padding: 10px;
-        width: 200px;
-      }
-      
-      .container-fluid {
-        margin-top: 10px;
-      }
-      
-      .review {
-        background-color: green;
-      }
-      
-      .main{
-        display:flex;
-        justify-content:center;
-      }
-      .column1,
-      .column2,
-      .column3{
-        margin-left:40px;
-        margin-right:40px;
-      }
-      
-      .btn {
-        width:200px;
-        padding: 12px 24px;
-        font-size: 16px;
-        border-radius: 8px;
-        cursor: pointer;
-        margin-bottom: 20px;
-      }
-      
-      .btn-primary {
-        background-color: #007bff;
-        color: #fff;
-        border: none;
-        margin-right: 10px;
-      }
-      
-      .btn-primary:hover {
-        background-color: #0069d9;
-      }
-      
-      .btn-primary:active {
-        background-color: #0056b3;
-      }
-      .radio-group {
-        display: flex;
-        gap: 10px;
-        
-      }
-      
-      .checkbox-group {
-        display: flex;
-        gap: 10px;
-        justify-content:center;
-      }
-      
-      .checkbox-group label {
-        display: inline-block;
-        border: 2px solid #ccc;
-        padding: 5px 10px;
-        border-radius: 4px;
-        margin-left:50px;
-        margin-top:20px;
-      }
-      
-      .checkbox-group label input[type="checkbox"] {
-        margin-right: 5px;
-      }
-      
-      .checkbox-group label input[type="checkbox"]:checked {
-        background-color: #007bff;
-        color: #fff;
-      }
-      
-      
-      
-      
-      
-      
-      
-      
-      .containers {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-      }
-      
-      .card {
-        width: 80%;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        padding: 10px;
-        margin-bottom: 20px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-      }
-      
-      .card-header {
-        background-color: #f4f4f4;
-        padding: 10px;
-        border-bottom: 1px solid #ccc;
-        text-align: center;
-      }
-      
-      .card-body {
-        padding: 10px;
-        
-      }
-      
-      .card-body input[type="text"] {
-        width: 100%;
-        height: 30px;
-        padding: 5px;
-        font-size: 16px;
-        margin-bottom: 10px;
-      }
-      
-      .card-body button {
-        padding: 5px 10px;
-        font-size: 16px;
-      }
-      
-      .comments {
-        width: 95%;
-        text-align: justify;
-      }
-      
-      .comments h2 {
-        text-align: center;
-      }
-      
-      .comments ul {
-        list-style-type: none;
-        padding: 0;
-        width:100%;
-      }
-      
-      .comments li {
-        background-color: #f4f4f4;
-        padding: 10px;
-        margin-bottom: 10px;
-        width:100%;
-      }
-      
-      .comments li:last-child {
-        margin-bottom: 0;
-      }
-      .comment-user {
-        font-weight: bold;
-      }
-      <style/>
+
 </html>
