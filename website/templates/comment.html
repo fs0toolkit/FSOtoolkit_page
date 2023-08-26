@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -13,24 +14,24 @@
 
 <body>
     <header class="text-gray-400 bg-gray-800 body-font">
-        <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
-          <a class="flex title-font font-medium items-center text-white mb-4 md:mb-0">
-            <img src="{{ url_for('static', filename='fs0.PNG') }}" fill="none" stroke="currentColor" stroke-linecap="rectangle" stroke-linejoin="round" stroke-width="0" class="w-46 h-12 text-white p-0 bg-blue-400 rectangle-full" viewBox="0 45 24 24">
-              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
-            
-            <span class="ml-3 text-xl"></span>
-          </a>
-          <nav class="md:ml-auto flex flex-wrap items-center text-base justify-center">
-            <a href = "/" class="mr-5 hover:text-white"><button CLASS="btn" >Review</a></button>
-            <a href = "comment.html"class="mr-5 hover:text-white"><button CLASS="btn">Comment</a></button>
-          </nav>
-          <button class="inline-flex items-center bg-gray-800 border-0 py-1 px-1 focus:outline-none hover:bg-gray-700 rounded text-base mt-4 md:mt-0">MyAccount
-            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" class="w-4 h-4 ml-1" viewBox="0 0 24 24">
-              <path d="M5 12h14M12 5l7 7-7 7"></path>
-            </svg>
-          </button>
+        <div class="container mx-auto flex flex-wrap p-2 flex-col md:flex-row items-center">
+            <a class="flex title-font font-medium items-center text-white mb-4 md:mb-0">
+                <img src="{{ url_for('static', filename='fs0.PNG') }}" fill="none" stroke="currentColor" stroke-linecap="rectangle" stroke-linejoin="round" stroke-width="0" class="w-46 h-12 text-white p-0 bg-blue-400 rectangle-full" viewBox="0 45 24 24">
+                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
+
+                <span class="ml-3 text-xl"></span>
+            </a>
+            <nav class="md:ml-auto flex flex-wrap items-center text-base justify-center">
+                <a href="" class=" hover:text-white bg-gray-800 text-xl"><button CLASS="btn" >Review</a></button>
+                <a href="comment.html" class=" hover:text-white bg-gray-800 text-xl"><button CLASS="btn">Comment</a></button>
+            </nav>
+            <button class="inline-flex items-center bg-gray-800 border-0 py-0 px-1 focus:outline-none hover:bg-gray-700 rounded text-base ml-4 mb-4 md:mt-0 text-xl">MyAccount
+        <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" class="w-4 h-4 ml-1" viewBox="0 0 24 24">
+          <path d="M5 12h14M12 5l7 7-7 7"></path>
+        </svg>
+      </button>
         </div>
-      </header>
+    </header>
     <div class="containers">
         <div class="card">
             <div class="card-header">
@@ -56,201 +57,189 @@
     <style>
         .container {
             display: flex;
-          }
-          
-          .text-box {
+        }
+        
+        .text-box {
             background-color: blue;
             color: white;
             padding: 10px;
             width: 100px;
             border: 2px solid black;
-          }
-          
-          .dropdown-container {
+        }
+        
+        .dropdown-container {
             margin: 10px;
-          }
-          
-          .content {
+        }
+        
+        .content {
             border: 2px solid black;
             padding: 10px;
             width: 200px;
-          }
-          
-          .container-fluid {
+        }
+        
+        .container-fluid {
             margin-top: 10px;
-          }
-          
-          .review {
+        }
+        
+        .review {
             background-color: green;
-          }
-          
-          .main{
-            display:flex;
-            justify-content:center;
-          }
-          .column1,
-          .column2,
-          .column3{
-            margin-left:40px;
-            margin-right:40px;
-          }
-          
-          .btn {
-            width:200px;
+        }
+        
+        .main {
+            display: flex;
+            justify-content: center;
+        }
+        
+        .column1,
+        .column2,
+        .column3 {
+            margin-left: 40px;
+            margin-right: 40px;
+        }
+        
+        .btn {
+            width: 200px;
             padding: 12px 24px;
             font-size: 16px;
             border-radius: 8px;
             cursor: pointer;
             margin-bottom: 20px;
-          }
-          
-          .btn-primary {
+        }
+        
+        .btn-primary {
             background-color: #007bff;
             color: #fff;
             border: none;
             margin-right: 10px;
-          }
-          
-          .btn-primary:hover {
+        }
+        
+        .btn-primary:hover {
             background-color: #0069d9;
-          }
-          
-          .btn-primary:active {
+        }
+        
+        .btn-primary:active {
             background-color: #0056b3;
-          }
-          .radio-group {
+        }
+        
+        .radio-group {
             display: flex;
             gap: 10px;
-            
-          }
-          
-          .checkbox-group {
+        }
+        
+        .checkbox-group {
             display: flex;
             gap: 10px;
-            justify-content:center;
-          }
-          
-          .checkbox-group label {
+            justify-content: center;
+        }
+        
+        .checkbox-group label {
             display: inline-block;
             border: 2px solid #ccc;
             padding: 5px 10px;
             border-radius: 4px;
-            margin-left:50px;
-            margin-top:20px;
-          }
-          
-          .checkbox-group label input[type="checkbox"] {
+            margin-left: 50px;
+            margin-top: 20px;
+        }
+        
+        .checkbox-group label input[type="checkbox"] {
             margin-right: 5px;
-          }
-          
-          .checkbox-group label input[type="checkbox"]:checked {
+        }
+        
+        .checkbox-group label input[type="checkbox"]:checked {
             background-color: #007bff;
             color: #fff;
-          }
-          
-          
-          
-          
-          
-          
-          
-          
-          .containers {
+        }
+        
+        .containers {
             display: flex;
             justify-content: center;
             align-items: center;
             flex-direction: column;
-          }
-          
-          .card {
+        }
+        
+        .card {
             width: 80%;
             border: 1px solid #ccc;
             border-radius: 4px;
             padding: 10px;
             margin-bottom: 20px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-          }
-          
-          .card-header {
+        }
+        
+        .card-header {
             background-color: #f4f4f4;
             padding: 10px;
             border-bottom: 1px solid #ccc;
             text-align: center;
-          }
-          
-          .card-body {
+        }
+        
+        .card-body {
             padding: 10px;
-            
-          }
-          
-          .card-body input[type="text"] {
+        }
+        
+        .card-body input[type="text"] {
             width: 100%;
             height: 30px;
             padding: 5px;
             font-size: 16px;
             margin-bottom: 10px;
-          }
-          
-          .card-body button {
+        }
+        
+        .card-body button {
             padding: 5px 10px;
             font-size: 16px;
-          }
-          
-          .comments {
+        }
+        
+        .comments {
             width: 95%;
             text-align: justify;
-          }
-          
-          .comments h2 {
+        }
+        
+        .comments h2 {
             text-align: center;
-          }
-          
-          .comments ul {
+        }
+        
+        .comments ul {
             list-style-type: none;
             padding: 0;
-            width:100%;
-          }
-          
-          .comments li {
+            width: 100%;
+        }
+        
+        .comments li {
             background-color: #f4f4f4;
             padding: 10px;
             margin-bottom: 10px;
-            width:100%;
-          }
-          
-          .comments li:last-child {
-            margin-bottom: 0;
-          }
-          .comment-user {
-            font-weight: bold;
-          }
-        </styles>
-
-        <script>
-          function addComment() {
-            var nameInput = document.getElementById("name-input");
-            var commentInput = document.getElementById("comment-input");
-            var nameText = nameInput.value.trim();
-            var commentText = commentInput.value.trim();
+            width: 100%;
+        }
         
-            if (nameText !== "" && commentText !== "") {
-                var commentList = document.getElementById("comment-list");
-                var newComment = document.createElement("li");
-                var userElement = document.createElement("span");
-                userElement.className = "comment-user";
-                userElement.innerText = nameText + ": ";
-                var contentElement = document.createElement("span");
-                contentElement.className = "comment-content";
-                contentElement.innerText = commentText;
+        .comments li:last-child {
+            margin-bottom: 0;
+        }
+        
+        .comment-user {
+            font-weight: bold;
+        }
+        
+        </styles><script>function addComment() {
+            var nameInput=document.getElementById("name-input");
+            var commentInput=document.getElementById("comment-input");
+            var nameText=nameInput.value.trim();
+            var commentText=commentInput.value.trim();
+            if (nameText !=="" && commentText !=="") {
+                var commentList=document.getElementById("comment-list");
+                var newComment=document.createElement("li");
+                var userElement=document.createElement("span");
+                userElement.className="comment-user";
+                userElement.innerText=nameText+": ";
+                var contentElement=document.createElement("span");
+                contentElement.className="comment-content";
+                contentElement.innerText=commentText;
                 newComment.appendChild(userElement);
                 newComment.appendChild(contentElement);
                 commentList.appendChild(newComment);
-                nameInput.value = "";
-                commentInput.value = "";
+                nameInput.value="";
+                commentInput.value="";
             }
         }
-        </script>
-</body>
-
-
-</html>
+        
+        </script></body></html>
