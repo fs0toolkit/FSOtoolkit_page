@@ -11,53 +11,60 @@
     <title>FSO toolkit</title>
 </head>
 
-
 <body>
     <header class="text-gray-400 bg-gray-800 body-font">
         <div class="container mx-auto flex flex-wrap p-2 flex-col md:flex-row items-center">
             <a class="flex title-font font-medium items-center text-white mb-4 md:mb-0">
-                <img src="{{ url_for('static', filename='fs0.PNG') }}" fill="none" stroke="currentColor" stroke-linecap="rectangle" stroke-linejoin="round" stroke-width="0" class="w-46 h-12 text-white p-0 bg-blue-400 rectangle-full" viewBox="0 45 24 24">
+                <img src="{{ url_for('static', filename='fs0.PNG') }}" fill="none" stroke="currentColor"
+                    stroke-linecap="rectangle" stroke-linejoin="round" stroke-width="0" class="w-46 h-12 text-white p-0 bg-blue-400 rectangle-full"
+                    viewBox="0 45 24 24">
                 <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
 
                 <span class="ml-3 text-xl"></span>
             </a>
             <nav class="md:ml-auto flex flex-wrap items-center text-base justify-center">
-                <a href="" class=" hover:text-white bg-gray-800 text-xl"><button CLASS="btn" >Review</a></button>
-                <a href="comment.html" class=" hover:text-white bg-gray-800 text-xl"><button CLASS="btn">Comment</a></button>
+                <a href="" class="hover:text-white bg-gray-800 text-xl"><button CLASS="btn">Review</button></a>
+                <a href="comment" class="hover:text-white bg-gray-800 text-xl"><button CLASS="btn">Comment</button></a>
             </nav>
             <button class="inline-flex items-center bg-gray-800 border-0 py-0 px-1 focus:outline-none hover:bg-gray-700 rounded text-base ml-4 mb-4 md:mt-0 text-xl">MyAccount
-            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" class="w-4 h-4 ml-1" viewBox="0 0 24 24">
-              <path d="M5 12h14M12 5l7 7-7 7"></path>
-            </svg>
-          </button>
+                <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"
+                    class="w-4 h-4 ml-1" viewBox="0 0 24 24">
+                    <path d="M5 12h14M12 5l7 7-7 7"></path>
+                </svg>
+            </button>
         </div>
     </header>
 
-    <div class="main">
-        <div class="column1">
-            <h3 style="padding-left:100px,">Feature Details</h3>
-            <div class="container-fluid">
+    <form method="POST" enctype="multipart/form-data">
+        <div class="main">
+            <div class="column1">
+                <h3 style="padding-left:100px;">Feature Details</h3>
+                <div class="container-fluid">
                 <div class="container">
                     <div class="text-box" id="feature_details">
                         Review Type
                     </div>
                     <div class="content">
                         <label for="dropdown1"></label>
-                        <select id="dropdown1">
+                        <select id="dropdown1" name="review_type" >
                         <option value=""></option>
                         <option value="New_Review" id="drop1_opt1">New Review</option>
                         <option value="Re_Review" id="drop1_opt2">Re-Review</option>
                     </select>
                     </div>
                 </div>
+
+
                 <div class="container">
                     <div class="text-box" id="title">
                         Title
                     </div>
                     <div class="content">
-                        <input type="start date" placeholder="P01:Review tool online" class="input" id="Titleinput">
+                        <input type="text" placeholder="P01:Review tool online" class="input" name="Titleinput">
                     </div>
                 </div>
+
+
                 <div class="container">
                     <div class="text-box" id="owner">
                         Owner
@@ -70,9 +77,10 @@
                     <div class="text-box" id="category">
                         Category
                     </div>
+
                     <div class="content">
                         <label for="dropdown2">label </label>
-                        <select id="dropdown2">
+                        <select id="dropdown2"name="review_type2" >
                         <option value=""></option>
                         <option value="Cloud" id="drop2_opt1">Cloud</option>
                         <option value="Operability" id="drop2_opt2">Operability</option>
@@ -82,13 +90,15 @@
                     </select>
                     </div>
                 </div>
+
+
                 <div class="container">
                     <div class="text-box" id="sol_area">
                         Sol Area
                     </div>
                     <div class="content">
                         <label for="dropdown3">Example</label>
-                        <select id="dropdown3">
+                        <select id="dropdown3" name="review_type3">
                         <option value=""></option>
                         <option value="SA/RandT1" id="drop3_opt1">SA/RandT1</option>
                         <option value="SA/RandT2" id="drop3_opt2">SA/RandT2</option>
@@ -100,13 +110,15 @@
                     </select>
                     </div>
                 </div>
+
+
                 <div class="container">
                     <div class="text-box" id="req_area">
                         Req Area
                     </div>
                     <div class="content">
                         <label for="dropdown4">Example</label>
-                        <select id="dropdown4">
+                        <select id="dropdown4" name="review_type4">
                         <option value=""></option>
                         <option value="RA/RandT1" id="drop4_opt1">RA/RandT1</option>
                         <option value="RA/RandT2" id="drop4_opt2">RA/RandT2</option>
@@ -118,13 +130,15 @@
                     </select>
                     </div>
                 </div>
+
+
                 <div class="container">
                     <div class="text-box" id="release">
                         Release
                     </div>
                     <div class="content">
                         <label for="dropdown5">Release label</label>
-                        <select id="dropdown5">
+                        <select id="dropdown5" name="review_type5" >
                         <option value=""></option>
                         <option value="23R1" id="drop5_opt1">23R1</option>
                         <option value="23R2" id="drop5_opt2">23R2</option>
@@ -141,13 +155,15 @@
                     </select>
                     </div>
                 </div>
+
+
                 <div class="container">
                     <div class="text-box" id="rat">
                         RAT
                     </div>
                     <div class="content">
                         <label for="dropdown6">dropdown here</label>
-                        <select id="dropdown6">
+                        <select id="dropdown6" name="review_type6" >
                         <option value=""></option>
                         <option value="4G" id="drop6_opt1">4G</option>
                         <option value="5G" id="drop6_opt2">5G</option>
@@ -157,21 +173,26 @@
                     </div>
                 </div>
             </div>
+
+
             <div class="container-fluid" style="margin-top:50px">
                 <div class="container">
-                    <div class="text-box" id="review_start">
+                    <div class="text-box" id="review_start_date">
                         Review start
                     </div>
                     <div class="content">
-                        <input type="start date" placeholder="start date" class="input" id="startDateInput">
+                        <input type="date" placeholder="start date" class="input" name="review_start_date">
+
+                        
                     </div>
                 </div>
                 <div class="container">
-                    <div class="text-box" id="review_end">
+                    <div class="text-box" id="review_end_date">
                         Review end
                     </div>
                     <div class="content">
-                        <input type="end date" placeholder="end date" class="input" id="endDateInput">
+                        <input type="date" placeholder="end date" class="input" name="review_end_date">
+
                     </div>
                 </div>
             </div>
@@ -182,7 +203,7 @@
                         Primary TM
                     </div>
                     <div class="content" style="width:auto">
-                        <input type="email" placeholder="xyz@nokia.com" class="input" id="primaryTMInput">
+                        <input type="email" placeholder="xyz@nokia.com" class="input" id="primaryTMInput" name="primaryTMInput">
                     </div>
                 </div>
                 <div class="container">
@@ -191,7 +212,7 @@
                     </div>
                     <div class="content">
                         <label for="dropdown7">dropdown here</label>
-                        <select id="dropdown7">
+                        <select id="dropdown7" name="review_type7" >
 						<option value=""></option>
 						<option value="yes" id="drop7_opt1">Yes</option>
 						<option value="no" id="drop7_opt2">No</option>
@@ -207,7 +228,7 @@
                         Review Summary
                     </div>
                     <div class="content review" style="width:auto">
-                        <input type="email" placeholder="review summary" class="input" id="reviewSummaryInput" style="background-color:green">
+                        <input type="email" placeholder="review summary" class="input" id="reviewSummaryInput" name="reviewSummaryInput" style="background-color:green">
                     </div>
                 </div>
             </div>
@@ -228,8 +249,9 @@
 
                 </div>
                 <div class="container" style="padding-left:60px">
-                    <button class="btn btn-primary" id="EmailButton">Draft Email</button>
-
+                    <button type="submit" class="btn btn-primary" id="EmailButton" href="/">Draft Email</button>
+  
+                </form>
                 </div>
                 <div class="container" style="padding-left:60px">
                     <button class="btn btn-primary" id="StatusButton">Check Review Status</button>
@@ -501,6 +523,7 @@
         </div>
 
     </div>
+</form>   
 
     <style>
         .container {

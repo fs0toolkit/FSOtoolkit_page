@@ -1,6 +1,40 @@
 <!DOCTYPE html>
 <html>
-
+    <!DOCTYPE html>
+    <html lang="en">
+    
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+        <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <title>FSO toolkit</title>
+    </head>
+    
+    
+    <body>
+        <header class="text-gray-400 bg-gray-800 body-font">
+            <div class="container mx-auto flex flex-wrap p-2 flex-col md:flex-row items-center">
+                <a class="flex title-font font-medium items-center text-white mb-4 md:mb-0">
+                    <img src="{{ url_for('static', filename='fs0.PNG') }}" fill="none" stroke="currentColor" stroke-linecap="rectangle" stroke-linejoin="round" stroke-width="0" class="w-46 h-12 text-white p-0 bg-blue-400 rectangle-full" viewBox="0 45 24 24">
+                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
+    
+                    <span class="ml-3 text-xl"></span>
+                </a>
+                <nav class="md:ml-auto flex flex-wrap items-center text-base justify-center">
+                    <a href="" class=" hover:text-white bg-gray-800 text-xl"><button CLASS="btn" >Review</a></button>
+                    <a href="comment.html" class=" hover:text-white bg-gray-800 text-xl"><button CLASS="btn">Comment</a></button>
+                </nav>
+                <button class="inline-flex items-center bg-gray-800 border-0 py-0 px-1 focus:outline-none hover:bg-gray-700 rounded text-base ml-4 mb-4 md:mt-0 text-xl">MyAccount
+                <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" class="w-4 h-4 ml-1" viewBox="0 0 24 24">
+                  <path d="M5 12h14M12 5l7 7-7 7"></path>
+                </svg>
+              </button>
+            </div>
+        </header>
+        
 <head>
     <title>Table Example</title>
     <style>
