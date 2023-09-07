@@ -60,43 +60,44 @@ def login():
 @login_required
 def home():
     if request.method == 'POST':
+        if request.form.get('Resetbutton'):
         # Capture form data
-        review_type = request.form.get('review_type')
-        title = request.form.get('Titleinput')
-        owner = current_user.email  # Use the email of the logged-in user
-        category = request.form.get('review_type2')
-        sol_area = request.form.get('review_type3')
-        req_area = request.form.get('review_type4')
-        release_label = request.form.get('review_type5')
-        rat = request.form.get('review_type6')
-        review_start_date = request.form.get('review_start_date')
-        if review_start_date:
-            try:
+            review_type = request.form.get('review_type')
+            title = request.form.get('Titleinput')
+            owner = current_user.email  # Use the email of the logged-in user
+            category = request.form.get('review_type2')
+            sol_area = request.form.get('review_type3')
+            req_area = request.form.get('review_type4')
+            release_label = request.form.get('review_type5')
+            rat = request.form.get('review_type6')
+            review_start_date = request.form.get('review_start_date')
+            if review_start_date:
+                try:
         # Attempt to parse the date
-                parsed_dates = datetime.strptime(review_start_date, '%Y-%m-%d')
+                    parsed_dates = datetime.strptime(review_start_date, '%Y-%m-%d')
         # If the parsing succeeds, it's a valid date
-            except ValueError:
+                except ValueError:
         # If parsing fails, it's not a valid date
-                flash('Invalid date format for review_start_date', category='error')
-        review_end_date = request.form.get('review_end_date')
-        if review_end_date:
-            try:
+                    flash('Invalid date format for review_start_date', category='error')
+            review_end_date = request.form.get('review_end_date')
+            if review_end_date:
+                try:
         # Attempt to parse the date
-                parsed_datee = datetime.strptime(review_end_date, '%Y-%m-%d')
+                    parsed_datee = datetime.strptime(review_end_date, '%Y-%m-%d')
         # If the parsing succeeds, it's a valid date
-            except ValueError:
+                except ValueError:
         # If parsing fails, it's not a valid date
-                flash('Invalid date format for review_end_date', category='error')
+                    flash('Invalid date format for review_end_date', category='error')
 
         
         
-        primary_tm = request.form.get('primaryTMInput')
-        sign_off = request.form.get('review_type7')
-        review_summary = request.form.get('reviewSummaryInput')
+            primary_tm = request.form.get('primaryTMInput')
+            sign_off = request.form.get('review_type7')
+            review_summary = request.form.get('reviewSummaryInput')
 
-        conn, c = sql_connector()
+            conn, c = sql_connector()
             # Insert form data into the 'reviews' table
-        c.execute("""
+            c.execute("""
                 INSERT INTO reviews (
                     review_type, title, owner, category, sol_area, req_area,
                     release_label, rat,review_start_date, review_end_date,
@@ -107,8 +108,71 @@ def home():
                 release_label, rat, parsed_dates, parsed_datee,
                 primary_tm, sign_off, review_summary
             ))
-        conn.commit()
-        flash('Review added!', category='success')
+            conn.commit()
+            flash('Review added!', category='success')
+
+
+
+    # elif request.method == 'GET':
+    #     if request.form.get('updatebutton'):
+    #     # Capture form data
+    #         title = request.form.get('Titleinput')
+    #         owner = current_user.email  # Use the email of the logged-in user
+    #         category = request.form.get('review_type2')
+    #         sol_area = request.form.get('review_type3')
+    #         req_area = request.form.get('review_type4')
+
+
+    #         conn, c = sql_connector()
+    #         # Insert form data into the 'reviews' table
+    #         c.execute("""
+    #             select (
+    #                 review_type, title, owner, category, sol_area, req_area,
+    #                 release_label, rat,review_start_date, review_end_date,
+    #                 primary_tm, sign_off, review_summary
+    #             ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+    #                 from reviews
+    #         """, (
+    #             review_type, title, owner, category, sol_area, req_area,
+    #             release_label, rat, parsed_dates, parsed_datee,
+    #             primary_tm, sign_off, review_summary
+    #         ))
+    #         conn.commit()
+    #         flash('Review added!', category='success')
+
+
+                    # elif request.form.get('reset_button'):
+    
+        #     if row:
+        #         # Populate the form fields with values from the 'default' table
+        #         review_type = row['Cloud_Assignment']
+        #         title = row['Operability_Assignment']
+        #         # Continue populating other fields as well
+
+        # elif request.form.get('UpdateButton'):
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     return render_template('home.html', user=current_user)
 
