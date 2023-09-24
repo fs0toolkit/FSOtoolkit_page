@@ -98,7 +98,7 @@
                     </div>
                     <div class="content">
                         <label for="dropdown3">Example</label>
-                        <select id="dropdown3" name="review_type3">
+                        <select id="dropdown3" name="dropdown3">
                         <option value=""></option>
                         <option value="SA/RandT1" id="drop3_opt1">SA/RandT1</option>
                         <option value="SA/RandT2" id="drop3_opt2">SA/RandT2</option>
@@ -155,6 +155,19 @@
                     </select>
                     </div>
                 </div>
+
+                {% if review_data %}
+                <script>
+                // JavaScript to populate the input fields with review_data
+                var reviewData = {{ review_data | tojson | safe }};
+                document.addEventListener("DOMContentLoaded", function() {
+                    console.log(reviewData); // Check if reviewData is populated
+                    document.getElementById('dropdown5').value = reviewData['release_label'];
+                    // Populate other fields similarly
+                });
+                </script>
+                {% endif %}
+                
 
 
                 <div class="container">
@@ -236,27 +249,34 @@
 
 
 
-        <div class="column2">
+     <div class="column2">
             <h3 style="padding-left:100px">Review Tool</h3>
 
             <div class="container-fluid" style="margin-top:50px">
                 <div class="container" style="padding-left:60px">
-                    <button class="btn btn-primary" name="Resetbutton" id="Resetbutton">Reset</button>
+                    <button class="btn btn-primary" name="Resetbutton" id="Resetbutton" type="submit">Reset</button>
 
                 </div>
-                <div class="container" style="padding-left:60px">
-                    <button class="btn btn-primary" name="UpdateButton" id="UpdateButton">Update Reviewers</button>
 
-                </div>
                 <div class="container" style="padding-left:60px">
-                    <button type="submit" class="btn btn-primary" id="EmailButton" name = "EmailButton"href="/">Draft Email</button>
+                    <button  class="btn btn-primary" id="EmailButton" name ="EmailButton"type="submit">Draft Email</button>
   
-                </form>
                 </div>
+                
+                <div class="container" style="padding-left:60px">
+                    <button class="btn btn-primary" name="UpdateButton" id="UpdateButton" formmethod="GET">Update Reviewers</button>
+
+                </div>
+
                 <div class="container" style="padding-left:60px">
                     <button class="btn btn-primary" id="StatusButton">Check Review Status</button>
-
                 </div>
+
+       
+
+
+
+                
                 <h3 style="padding-left:60px">Reviewers To be Added?</h3>
                 <div class="radio-group" id="radio_buttons" style="padding-left: 100px;">
                     <label>
@@ -268,6 +288,7 @@
 
                 </div>
             </div>
+
 
             <div class="container-fluid" style="margin-top:50px">
                 <h3 style="padding-left:60px">Conditional Reviewers Selector</h3>
