@@ -31,52 +31,15 @@ def sql_connector():
     return conn, c
 
 # Route for the signup page
-@views.route('/signup', methods=['GET', 'POST'])
-def signup():
-    if request.method == 'POST':
-        email = request.form.get('email')
-        first_name = request.form.get('firstName')
-        password1 = request.form.get('password1')
-        password2 = request.form.get('password2')
 
-        # Check if the email already exists in the database
-        existing_user = User.query.filter_by(email=email).first()
-        if existing_user:
-            flash('Email already exists. Please choose another.', category='error')
-        elif password1 != password2:
-            flash('Passwords do not match. Please try again.', category='error')
-        else:
-            # Create a new user and add them to the database
-            new_user = User(email=email, first_name=first_name, password=password1)
-            db.session.add(new_user)
-            db.session.commit()
-            flash('Account created successfully. You can now log in.', category='success')
-            return redirect(url_for('views.login'))
-
-    return render_template('signup.html')
-
-# Route for the login page
-@views.route('/login', methods=['GET', 'POST'])
-def login():
-    if request.method == 'POST':
-        email = request.form.get('email')
-        password = request.form.get('password')
-
-        user = User.query.filter_by(email=email).first()
-
-        if user and user.check_password(password):
-            login_user(user, remember=True)
-            flash('Login successful!', category='success')
-            return redirect(url_for('views.home'))
-        else:
-            flash('Login failed. Please check your email and password.', category='error')
-
-    return render_template('login.html')
 
 # Route for the home page (requires login)
 @views.route('/', methods=['GET', 'POST'])
 @login_required
 def home():
+    if not current_user.is_authenticated:
+        return redirect(url_for('views.login'))
+
 
     if request.method == 'POST':
         if 'Resetbutton' in request.form:
