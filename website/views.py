@@ -9,6 +9,7 @@ import re
 import requests
 import adal
 
+
 views = Blueprint('views', __name__)
 
 
