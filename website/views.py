@@ -38,62 +38,75 @@ def sql_connector():
 @views.route('/', methods=['GET', 'POST'])
 @login_required
 def home():
-    if not current_user.is_authenticated:
-        return redirect(url_for('views.login'))
-
-
     if request.method == 'POST':
         if 'Resetbutton' in request.form:
-            # if request.form.get('Resetbutton'):
-        # Capture form data
+            try:
+                review_start_date = datetime.strptime(request.form.get('review_start_date'), '%Y-%m-%d')
+                review_end_date = datetime.strptime(request.form.get('review_end_date'), '%Y-%m-%d')
+            except ValueError:
+                flash('Invalid date format for review_start_date or review_end_date', category='error')
+                return redirect(url_for('views.home'))
+
+            # Get other form data and insert into the database (using parameterized queries)
             review_type = request.form.get('review_type')
             title = request.form.get('Titleinput')
-            owner = current_user.email  # Use the email of the logged-in user
+            owner = current_user.email
             category = request.form.get('review_type2')
             sol_area = request.form.get('dropdown3')
             req_area = request.form.get('review_type4')
             release_label = request.form.get('review_type5')
             rat = request.form.get('review_type6')
-            review_start_date = request.form.get('review_start_date')
-            if review_start_date:
-                try:
-        # Attempt to parse the date
-                    parsed_dates = datetime.strptime(review_start_date, '%Y-%m-%d')
-        # If the parsing succeeds, it's a valid date
-                except ValueError:
-        # If parsing fails, it's not a valid date
-                    flash('Invalid date format for review_start_date', category='error')
-            review_end_date = request.form.get('review_end_date')
-            if review_end_date:
-                try:
-        # Attempt to parse the date
-                    parsed_datee = datetime.strptime(review_end_date, '%Y-%m-%d')
-        # If the parsing succeeds, it's a valid date
-                except ValueError:
-        # If parsing fails, it's not a valid date
-                    flash('Invalid date format for review_end_date', category='error')
-
-        
-        
             primary_tm = request.form.get('primaryTMInput')
             sign_off = request.form.get('review_type7')
             review_summary = request.form.get('reviewSummaryInput')
 
             conn, c = sql_connector()
-            # Insert form data into the 'reviews' table
             c.execute("""
                 INSERT INTO reviews (
                     review_type, title, owner, category, sol_area, req_area,
-                    release_label, rat,review_start_date, review_end_date,
+                    release_label, rat, review_start_date, review_end_date,
                     primary_tm, sign_off, review_summary
                 ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
             """, (
                 review_type, title, owner, category, sol_area, req_area,
-                release_label, rat, parsed_dates, parsed_datee,
+                release_label, rat, review_start_date, review_end_date,
                 primary_tm, sign_off, review_summary
             ))
             conn.commit()
             flash('Review added!', category='success')
+        
+        elif 'savecomm' in request.form:
+            # Get data from the form
+            print("inside savecomm")
+            page_slide = request.form.get('input1')
+            comment = request.form.get('input2')
+            reviewer = request.form.get('input3')
+            correction_status = request.form.get('input8')
+            correction_comments = request.form.get('input9')
+            agreed_with_reviewer = request.form.get('input10')
+            reviewer_email = request.form.get('reviewer_email')
+            correction = request.form.get('correction')
+
+            # Insert data into the database (using parameterized queries)
+            sql = "INSERT INTO your_table_name (Page_Slide, Comment, Reviewer, Correction_Status, Correction_Comments, Agreed_with_reviewer, Reviewer_email, Correction) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)"
+            val = (page_slide, comment, reviewer, correction_status, correction_comments, agreed_with_reviewer, reviewer_email, correction)
+            print(sql)
+            conn, c = sql_connector()
+            c.execute(sql, val)
+            conn.commit()
+            flash('Record inserted.', category='success')
+
+
+
+
+
+
+
+
+
+
+
+
             
         elif 'EmailButton' in request.form:
             print("in draft email")
@@ -152,11 +165,14 @@ def home():
 
 
 
+
+
     elif request.method == 'GET':
         # if request.form.get('updatebutton'):
         # if 'updatebutton' in request.form:
         # Capture form data
             # Capture form data for retrieving an existing record
+        review_type = request.args.get('review_type', '')
         print("inside get req")
         category = request.form.get('review_type2')
         sol_area = request.form.get('dropdown3')

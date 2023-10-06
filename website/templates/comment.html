@@ -24,7 +24,7 @@
                     <span class="ml-3 text-xl"></span>
                 </a>
                 <nav class="md:ml-auto flex flex-wrap items-center text-base justify-center">
-                    <a href="" class=" hover:text-white bg-gray-800 text-xl"><button CLASS="btn" >Review</a></button>
+                    <a href="/" class=" hover:text-white bg-gray-800 text-xl"><button CLASS="btn" >Review</a></button>
                     <a href="comment.html" class=" hover:text-white bg-gray-800 text-xl"><button CLASS="btn">Comment</a></button>
                 </nav>
                 <button class="inline-flex items-center bg-gray-800 border-0 py-0 px-1 focus:outline-none hover:bg-gray-700 rounded text-base ml-4 mb-4 md:mt-0 text-xl">MyAccount
@@ -125,6 +125,7 @@
 </head>
 
 <body>
+    <form method="POST" enctype="multipart/form-data">
     <div class="container">
         <div class="summary-table">
             <table id="summary1">
@@ -185,6 +186,8 @@
         </div>
     </div>
 
+
+    
     <div class="container">
         <div class="table-container">
             <table id="left"><br>
@@ -209,8 +212,10 @@
                 </tr>
                 <tr>
                     <td><input type="text" class="custom-color" id="input4"></td>
+                    
                     <td><input type="text" class="custom-color" id="input5"></td>
                     <td><input type="text" class="custom-color" id="input6"></td>
+                    
                     <td>
                         <select id="table1-select2" class="custom-color" onchange="updateInputAndDropdownBoxColor(this, '')">
                             <option value="option1" style="background-color: red; color: white;">Fatal</option>
@@ -233,7 +238,11 @@
                     <th>Agreed with reviewer (to be updated by the reviewer)</th>
                 </tr>
                 <tr>
-                    <td><input type="text" class="custom-color" id="input7"></td>
+                    <td>
+               
+                        {{ current_user.email }}
+                    
+                </td>
                     <td>
                         <select id="table2-select1" class="custom-color" onchange="updateInputAndDropdownBoxColor(this, '')">
                             <option value="option5" style="background-color: blue; color: white;">Accepted</option>
@@ -274,7 +283,13 @@
             </table>
         </div>
     </div>
-    <button onclick="addNewRows()">Add New Rows</button>
+    <div class="container-fluid" style="margin-top:50px">
+        <div class="container" style="padding-left:60px">
+           
+    <button class="btn btn-primary" name="savecomm" id="savecomm" type="submit" onclick="addNewRows()" >savecomm</button>
+</form>   
+</div>
+        </div>
 
 
     <script>

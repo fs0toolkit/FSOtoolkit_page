@@ -70,7 +70,7 @@
                         Owner
                     </div>
                     <div class="content">
-                        xyz@nokia.com
+                        {{  current_user.email }}
                     </div>
                 </div>
                 <div class="container">
@@ -81,7 +81,7 @@
                     <div class="content">
                         <label for="dropdown2">label </label>
                         <select id="dropdown2"name="review_type2" >
-                        <option value=""></option>
+                        <option value="{{ owner }}"></option>
                         <option value="Cloud" id="drop2_opt1">Cloud</option>
                         <option value="Operability" id="drop2_opt2">Operability</option>
                         <option value="RRM_and_Telecom" id="drop2_opt3">RRM_and_Telecom</option>
@@ -90,6 +90,17 @@
                     </select>
                     </div>
                 </div>
+
+     <!--           <div class="content">
+                    <select id="dropdown2" name="review_type2">
+                        {% for owner in owners %}
+                            <option value="{{ owner }}">{{ owner }}</option>
+                        {% endfor %}
+                        <option value="{{ review_type }}">{{ oreview_type }}</option>
+                        <p>{{ review_type }}</p>
+                    </select>
+                </div>
+            -->
 
 
                 <div class="container">
@@ -139,7 +150,7 @@
                     <div class="content">
                         <label for="dropdown5">Release label</label>
                         <select id="dropdown5" name="review_type5" >
-                        <option value=""></option>
+                        <option value="{}"></option>
                         <option value="23R1" id="drop5_opt1">23R1</option>
                         <option value="23R2" id="drop5_opt2">23R2</option>
                         <option value="23R3" id="drop5_opt3">23R3</option>
@@ -216,7 +227,7 @@
                         Primary TM
                     </div>
                     <div class="content" style="width:auto">
-                        <input type="email" placeholder="xyz@nokia.com" class="input" id="primaryTMInput" name="primaryTMInput">
+                        <input type="email" placeholder="{{owner}}" class="input" id="primaryTMInput" name="primaryTMInput">
                     </div>
                 </div>
                 <div class="container">
