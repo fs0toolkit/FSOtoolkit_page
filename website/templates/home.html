@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -143,29 +144,34 @@
                 </div>
 
 
+
                 <div class="container">
                     <div class="text-box" id="release">
                         Release
                     </div>
                     <div class="content">
                         <label for="dropdown5">Release label</label>
-                        <select id="dropdown5" name="review_type5" >
-                        <option value="{}"></option>
-                        <option value="23R1" id="drop5_opt1">23R1</option>
-                        <option value="23R2" id="drop5_opt2">23R2</option>
-                        <option value="23R3" id="drop5_opt3">23R3</option>
-                        <option value="23R4" id="drop5_opt4">23R4</option>
-                        <option value="24R1" id="drop5_opt5">24R1</option>
-                        <option value="24R2" id="drop5_opt6">24R2</option>
-                        <option value="24R3" id="drop5_opt7">24R3</option>
-                        <option value="24R4" id="drop5_opt8">24R4</option>
-                        <option value="25R1" id="drop5_opt9">25R1</option>
-                        <option value="25R2" id="drop5_opt10">25R2</option>
-                        <option value="25R3" id="drop5_opt11">25R3</option>
-                        <option value="25R4" id="drop5_opt12">25R4</option>
-                    </select>
+                        <select id="dropdown5" name="review_type5">
+                            <option value="" {% if views.home.release_label == '' %}selected{% endif %}>Select a release label</option>
+                            <option value="23R1" id="drop5_opt1">23R1</option>
+                            <option value="23R2" id="drop5_opt2">23R2</option>
+                            <option value="23R3" id="drop5_opt3">23R3</option>
+                            <option value="23R4" id="drop5_opt4">23R4</option>
+                            <option value="24R1" id="drop5_opt5">24R1</option>
+                            <option value="24R2" id="drop5_opt6">24R2</option>
+                            <option value="24R3" id="drop5_opt7">24R3</option>
+                            <option value="24R4" id="drop5_opt8">24R4</option>
+                            <option value="25R1" id="drop5_opt9">25R1</option>
+                            <option value="25R2" id="drop5_opt10">25R2</option>
+                            <option value="25R3" id="drop5_opt11">25R3</option>
+                            <option value="25R4" id="drop5_opt12">25R4</option>
+                        </select>
                     </div>
                 </div>
+                
+
+
+                
 
                 {% if review_data %}
                 <script>
@@ -176,6 +182,31 @@
                     document.getElementById('dropdown5').value = reviewData['release_label'];
                     // Populate other fields similarly
                 });
+                const UpdateButton= document.getElementById('UpdateButton');
+
+                // Add a click event listener to the button
+                UpdateButton.addEventListener('click', function() {
+                  // Perform a GET request when the button is clicked
+                  // You can replace the URL with the one you want to request
+                  fetch('http://127.0.0.1:5000/', {
+                    method: 'GET'
+                  })
+                  .then(response => {
+                    if (response.ok) {
+                      return response.text(); // or response.json() if the response is JSON
+                    } else {
+                      throw new Error('Network response was not ok');
+                    }
+                  })
+                  .then(data => {
+                    // Handle the data from the response here
+                    console.log(data);
+                  })
+                  .catch(error => {
+                    // Handle any errors that occurred during the fetch
+                    console.error('Error:', error);
+                  });
+    
                 </script>
                 {% endif %}
                 
@@ -265,7 +296,7 @@
 
             <div class="container-fluid" style="margin-top:50px">
                 <div class="container" style="padding-left:60px">
-                    <button class="btn btn-primary" name="Resetbutton" id="Resetbutton" type="submit">Reset</button>
+                    <button class="btn btn-primary" name="ResetButton" id="ResetButton" type="submit">Reset</button>
 
                 </div>
 
@@ -275,7 +306,7 @@
                 </div>
                 
                 <div class="container" style="padding-left:60px">
-                    <button class="btn btn-primary" name="UpdateButton" id="UpdateButton" formmethod="GET">Update Reviewers</button>
+                    <button class="btn btn-primary" name="UpdateButton" id="UpdateButton" value="Update">Update Reviewers</button>
 
                 </div>
 

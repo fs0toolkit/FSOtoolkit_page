@@ -1,13 +1,18 @@
-from flask import Blueprint, render_template, request, flash, redirect, url_for
+from flask import (
+    Blueprint, render_template, request, flash, redirect, url_for, Flask
+)
 from flask_login import login_required, login_user, logout_user, current_user
 from .models import User, Review, Comment
 from . import db
-from flask import Flask, render_template, request
-import pymysql
-from datetime import datetime 
+from datetime import datetime
 import re
 import requests
 import adal
+from flask_mysqldb import MySQL
+import yaml
+import pymysql
+from flask import current_app
+from flask_mysqldb import MySQL
 
 
 views = Blueprint('views', __name__)
@@ -31,7 +36,6 @@ def sql_connector():
     c = conn.cursor()
     return conn, c
 
-# Route for the signup page
 
 
 # Route for the home page (requires login)
@@ -39,7 +43,9 @@ def sql_connector():
 @login_required
 def home():
     if request.method == 'POST':
-        if 'Resetbutton' in request.form:
+        print("inside teh ")
+        if 'ResetButton' in request.form:
+            print("ResetButton")
             try:
                 review_start_date = datetime.strptime(request.form.get('review_start_date'), '%Y-%m-%d')
                 review_end_date = datetime.strptime(request.form.get('review_end_date'), '%Y-%m-%d')
@@ -60,8 +66,9 @@ def home():
             sign_off = request.form.get('review_type7')
             review_summary = request.form.get('reviewSummaryInput')
 
-            conn, c = sql_connector()
-            c.execute("""
+            conn, cur = sql_connector()
+            # cur =  MySQL.connection.cursor()
+            cur.execute("""
                 INSERT INTO reviews (
                     review_type, title, owner, category, sol_area, req_area,
                     release_label, rat, review_start_date, review_end_date,
@@ -74,36 +81,6 @@ def home():
             ))
             conn.commit()
             flash('Review added!', category='success')
-        
-        elif 'savecomm' in request.form:
-            # Get data from the form
-            print("inside savecomm")
-            page_slide = request.form.get('input1')
-            comment = request.form.get('input2')
-            reviewer = request.form.get('input3')
-            correction_status = request.form.get('input8')
-            correction_comments = request.form.get('input9')
-            agreed_with_reviewer = request.form.get('input10')
-            reviewer_email = request.form.get('reviewer_email')
-            correction = request.form.get('correction')
-
-            # Insert data into the database (using parameterized queries)
-            sql = "INSERT INTO your_table_name (Page_Slide, Comment, Reviewer, Correction_Status, Correction_Comments, Agreed_with_reviewer, Reviewer_email, Correction) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)"
-            val = (page_slide, comment, reviewer, correction_status, correction_comments, agreed_with_reviewer, reviewer_email, correction)
-            print(sql)
-            conn, c = sql_connector()
-            c.execute(sql, val)
-            conn.commit()
-            flash('Record inserted.', category='success')
-
-
-
-
-
-
-
-
-
 
 
 
@@ -162,123 +139,40 @@ def home():
                 return "Error creating draft email. Status code:", response.status_code
 
 
+        elif 'UpdateButton' in request.form:
 
-
-
-
-
-    elif request.method == 'GET':
-        # if request.form.get('updatebutton'):
-        # if 'updatebutton' in request.form:
-        # Capture form data
-            # Capture form data for retrieving an existing record
-        review_type = request.args.get('review_type', '')
-        print("inside get req")
-        category = request.form.get('review_type2')
-        sol_area = request.form.get('dropdown3')
-        req_area = request.form.get('review_type4')
-        print(sol_area , req_area ,category )
-        conn, c = sql_connector()
-        # Retrieve a record from the 'reviews' table based on the combination of criteria
-        c.execute("""
-            SELECT *
-            FROM reviews
-            WHERE sol_area = %s AND req_area = %s AND category = %s
-        """, (category , sol_area, req_area))
-        # record =  0
-        record = c.fetchone()
-        print("helolo1 \n")
-        print(record)
-        if record:
-            # Populate the form inputs with the retrieved record's values
-            review_type, title, owner, _, _, _, release_label, rat, review_start_date, review_end_date, primary_tm, sign_off, review_summary = record
-            flash('Record found!', category='success')
-                        
-            # Split the input string into key-value pairs based on "&"
-        #     key_value_pairs = record.split('&')
-
-        #     # Create a dictionary to store the filtered keys
-        #     filtered_data = {}
-        #     print("helolo \n")
-        #     # Define a regular expression pattern to match keys starting with "review_type" followed by a number
-        #     pattern = re.compile(r'review_type(\d+)')
-
-        #     # Iterate through the key-value pairs
-        #     for pair in key_value_pairs:
-        #         # Split each pair into key and value based on "="
-        #         key, value = pair.split('=')
-                
-        #         # Check if the key matches the pattern
-        #         match = pattern.match(key)
-        #         if match:
-        #             # Extract the number from the key
-        #             number = match.group(1)
-                    
-        #             # Map the extracted keys to the desired names
-        #             mapping = {
-        #                 "1": "review_type",
-        #                 "2": "title",
-        #                 "3": "owner",
-        #                 "4": "rat",
-        #                 "5": "review_start_date",
-        #                 "6": "review_end_date",
-        #                 "7": "primary_tm",
-        #                 "8": "sign_off",
-        #                 "9": "review_summary"
-        #             }
-                    
-        #             # Use the mapping to get the desired key name
-        #             desired_key = mapping.get(number, f"review_type{number}")
-                    
-        #             # Store the desired key and value in the dictionary
-        #             filtered_data[desired_key] = value
-
-        #     # Print the resulting dictionary
-        #             # print(filtered_data)
-        #             print("helolo \n")
-
-
-
-
-
-
-        #     # print(record)
-        # else:
-        #     flash('No record found for the specified criteria.', category='error')
+            num = 0
+            print("Jai shreeram")
             
-    # record = '23R1'
-    # print(record)
-    return render_template('home.html', user=current_user )
-
-
-
-
-
-
-
-
-# request.method = 'GET'
-# a = home()
-# print(a)
-
-
-
-
-
-
-
-
-
-
-                    # elif request.form.get('reset_button'):
-    
-        #     if row:
-        #         # Populate the form fields with values from the 'default' table
-        #         review_type = row['Cloud_Assignment']
-        #         title = row['Operability_Assignment']
-        #         # Continue populating other fields as well
-
-        # elif request.form.get('UpdateButton'):
+            # Capture form data for retrieving an existing record
+            category = request.form.get('review_type2')
+            sol_area = request.form.get('dropdown3')
+            req_area = request.form.get('review_type4')
+            
+            print(sol_area, req_area, category)
+            
+            conn, c = sql_connector()
+            
+            # Retrieve a record from the 'reviews' table based on the combination of criteria
+            c.execute("""
+                SELECT *
+                FROM reviews
+                WHERE sol_area = %s AND req_area = %s AND category = %s
+            """, (sol_area, req_area, category))
+            
+            record = c.fetchone()
+            print("helolegbvsghsergwago1 \n")
+            print(record)
+            
+            if record:
+                # Unpack the record, assuming it has the expected number of values
+                num, review_type, title, owner, _, _, _, release_label, rat, review_start_date, review_end_date, primary_tm, sign_off, review_summary = record
+                
+                flash('Record found!', category='success')
+            else:
+                flash('No record found for the specified criteria.', category='error')
+            
+            return render_template('home.html', user=current_user)
 
 
 
