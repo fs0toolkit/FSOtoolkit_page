@@ -142,7 +142,7 @@ def home():
         elif 'UpdateButton' in request.form:
 
             num = 0
-            print("Jai shreeram")
+            print("Jai shreeram\n")
             
             # Capture form data for retrieving an existing record
             category = request.form.get('review_type2')
@@ -172,7 +172,7 @@ def home():
             else:
                 flash('No record found for the specified criteria.', category='error')
             
-            return render_template('home.html', user=current_user)
+    return render_template('home.html', user=current_user)
 
 
 
