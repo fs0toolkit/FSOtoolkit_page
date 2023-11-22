@@ -1,71 +1,205 @@
 <!DOCTYPE html>
-<html>
-    <!DOCTYPE html>
-    <html lang="en">
-    
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
-        <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
-        <script src="https://cdn.tailwindcss.com"></script>
-        <title>FSO toolkit</title>
-    </head>
-    
-    
-    <body>
-        <header class="text-gray-400 bg-gray-800 body-font">
-            <div class="container mx-auto flex flex-wrap p-2 flex-col md:flex-row items-center">
-                <a class="flex title-font font-medium items-center text-white mb-4 md:mb-0">
-                    <img src="{{ url_for('static', filename='fs0.PNG') }}" fill="none" stroke="currentColor" stroke-linecap="rectangle" stroke-linejoin="round" stroke-width="0" class="w-46 h-12 text-white p-0 bg-blue-400 rectangle-full" viewBox="0 45 24 24">
-                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
-    
-                    <span class="ml-3 text-xl"></span>
-                </a>
-                <nav class="md:ml-auto flex flex-wrap items-center text-base justify-center">
-                    <a href="/" class=" hover:text-white bg-gray-800 text-xl"><button CLASS="btn" >Review</a></button>
-                    <a href="comment.html" class=" hover:text-white bg-gray-800 text-xl"><button CLASS="btn">Comment</a></button>
-                </nav>
-                <button class="inline-flex items-center bg-gray-800 border-0 py-0 px-1 focus:outline-none hover:bg-gray-700 rounded text-base ml-4 mb-4 md:mt-0 text-xl">MyAccount
-                <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" class="w-4 h-4 ml-1" viewBox="0 0 24 24">
-                  <path d="M5 12h14M12 5l7 7-7 7"></path>
-                </svg>
-              </button>
-            </div>
-        </header>
-        
+<html lang="en">
+
 <head>
-    <title>Table Example</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>FSO toolkit</title>
+
+
+</head>
+
+<body>
+    <header class="text-gray-400 bg-gray-800 body-font">
+        <div class="container mx-auto flex flex-wrap p-2 flex-col md:flex-row items-center">
+            <a class="flex title-font font-medium items-center text-white mb-4 md:mb-0">
+                <img src="{{ url_for('static', filename='fs0.PNG') }}" fill="none" stroke="currentColor" stroke-linecap="rectangle" stroke-linejoin="round" stroke-width="0" class="w-46 h-12 text-white p-0 bg-blue-400 rectangle-full" viewBox="0 45 24 24">
+                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
+
+                <span class="ml-3 text-xl"></span>
+            </a>
+            <nav class="md:ml-auto flex flex-wrap items-center text-base justify-center">
+                <a href="/" class=" hover:text-white bg-gray-800 text-xl"><button CLASS="btn">Review</button></a>
+                <a href="comment" class=" hover:text-white bg-gray-800 text-xl"><button CLASS="btn">Comment</button></a>
+            </nav>
+            <button class="inline-flex items-center bg-gray-800 border-0 py-0 px-1 focus:outline-none hover:bg-gray-700 rounded text-base ml-4 mb-4 md:mt-0 text-xl">MyAccount
+                <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" class="w-4 h-4 ml-1" viewBox="0 0 24 24">
+                    <path d="M5 12h14M12 5l7 7-7 7"></path>
+                </svg>
+            </button>
+        </div>
+    </header>
+
+    <body>
+
+        
+        <form method="POST" enctype="multipart/form-data" >
+            <div class="container">
+                <div class="summary-table">
+                    <table id="summary1">
+                        <tr>
+                            <th>Option</th>
+                            <th>Count</th>
+                        </tr>
+                        <tr>
+                            <td>Fatal</td>
+                            <td id="summary1-option1">0</td>
+                        </tr>
+                        <tr>
+                            <td>Medium</td>
+                            <td id="summary1-option2">0 </td>
+                        </tr>
+                        <tr>
+                            <td>Neutral</td>
+                            <td id="summary1-option3" >0</td>
+                        </tr>
+                        <tr>
+                            <td>No Comments</td>
+                            <td id="summary1-option4">0</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="summary-table">
+                    <table id="summary2">
+                        <tr>
+                            <th>Option</th>
+                            <th>Count</th>
+                        </tr>
+                        <tr>
+                            <td>Further Dev</td>
+                            <td id="summary2-option8">0</td>
+                        </tr>
+                        <tr>
+                            <td>Accepted</td>
+                            <td id="summary2-option5">0</td>
+                        </tr>
+                        <tr>
+                            <td>Corrected</td>
+                            <td id="summary2-option7">0</td>
+                        </tr>
+                        <tr>
+                            <td>Rejected</td>
+                            <td id="summary2-option6">0</td>
+                        </tr>
+                        <tr>
+                            <td>No updates</td>
+                            <td id="summary2-option9">0</td>
+                        </tr>
+                        <tr>
+                            <td>Not Agreed</td>
+                            <td id="summary2-option11">0</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <form action="{{ url_for('views.process_input') }}" method="post">
+                <label for="local_project_id">Enter Local Project ID:</label>
+                <input type="text" name="local_project_id" id="local_project_id">
+                <button type="submit" name="submit" id="submit">Submit</button>
+        </form>
+
+
+            <div class="table-container">
+                <table id="right">
+                    <br>
+                    {{local_project_id}}
+                    <tr>
+                        {{local_project_id}}
+                        {% for i in heading %}
+                            <th>{{ i }}</th>
+                        {% endfor %}
+                    </tr>
+                    {% for j in record2 %}
+                        {% set project_id = j[0] %}  {# Assuming the project_id is the first element in the row #}
+                        {% if  local_project_id == project_id   %}
+                            <tr>
+                                {% for k in j %}
+                                    <td>{{ k }}</td>
+                                {% endfor %}
+                            </tr>
+                        {% endif %}
+                    {% endfor %}
+
+                        <tr>
+                            <td><input type="text" class="custom-color" id="id1" name='id1' value={{ id1 }}></td>
+                            <td><input type="text" class="custom-color" id="input1" name='page1' value={{ Pagesl }}></td>
+                            <td><input type="text" class="custom-color" id="input2" name='chapt1' value={{ chapt1 }}></td>
+                            <td><input type="text" class="custom-color" id="input3"  name= 'rc1' value={{ rc1 }} ></td>
+                            <td>
+                                <select name="severity" id="severitySelect" onchange="updateSummary(this.value)" name= 'seri'>
+                                    <option >{{fatal1}}</option>
+                                    <option value="1" style="background-color: red; color: white;">Fatal</option>
+                                    <option value="2" style="background-color: blue; color: white;">Medium</option>
+                                    <option value="3" style="background-color: green; color: white;">Neutral</option>   
+                                    <option value="4" style="background-color: yellow;">No Comments</option>
+                                </select>
+                            </td>
+                            <td>
+
+                                {{ current_user.email }}
+    
+                            </td>
+                            <td>
+                                <select id="table2-select1" class="custom-color" onchange="updateInputAndDropdownBoxColor(this, '')"  name= 'corr_stat'>
+                                    <option value="option5" style="background-color: blue; color: white;">Accepted</option>
+                                    <option value="option6" style="background-color: red; color: white;">Rejected</option>
+                                    <option value="option7" style="background-color: green; color: white;">Corrected</option>
+                                    <option value="option8" style="background-color: yellow;">Further Dev</option>
+                                    <option value="option9" style="background-color: orange;">No Updates Needed</option>
+                                </select>
+                            </td>
+                            <td><input type="text" class="custom-color" id="input10" name = 'corr_comm'></td>
+
+                            <td>
+                                <select id="table2-select4" class="custom-color" onchange="updateInputAndDropdownBoxColor(this, '')" name= 'agree'>
+                                    <option value="option10" style="background-color: green; color: white;">Yes</option>
+                                    <option value="option11" style="background-color: red;">No</option>
+                                </select>
+                            </td>
+                    
+                        </tr>
+                    </table>
+                </div>
+                <button class="btn btn-primary" name="savecomm" id="savecomm" type="submit">Save Comment</button>
+            </div>
+
+
+
+
     <style>
         .container {
             display: flex;
         }
-        
+
         .summary-table {
             margin-right: 20px;
         }
-        
+
         table {
             border-collapse: collapse;
             width: 100%;
             margin-bottom: 20px;
         }
-        
+
         th,
         td {
             padding: 10px;
-            text-align: left;
+            text-align: center;
         }
-        
+
         th {
             background-color: #f2f2f2;
         }
-        
+
         tr:nth-child(even) {
             background-color: #f9f9f9;
         }
-        
+
         input[type="text"],
         select {
             width: 100%;
@@ -74,297 +208,172 @@
             border-radius: 4px;
             box-sizing: border-box;
         }
+
         /* Add this CSS to align the first column of each table */
-        
+
         th:first-child,
         td:first-child {
             width: 150px;
         }
+
         /* Add this CSS to align the rows */
-        
+
         td:first-child {
             vertical-align: top;
         }
+
         /* Add this CSS to change the colors of dropdown options */
-        
+
         select.custom-color,
         input.custom-color {
             background-color: #f2f2f2;
             /* Default background color for the input and dropdown box */
         }
-        
+
         select.custom-color option:nth-child(1) {
             background-color: red;
             color: white;
         }
-        
+
         select.custom-color option:nth-child(2) {
             background-color: blue;
             color: white;
         }
-        
+
         select.custom-color option:nth-child(3) {
             background-color: green;
             color: white;
         }
-        
+
         select.custom-color option:nth-child(4) {
             background-color: yellow;
         }
-        
+
         select.custom-color option:nth-child(5) {
             background-color: orange;
         }
-        
+
         select.custom-color option:nth-child(6) {
             background-color: purple;
             color: white;
         }
+
         /* Add more styles for other options as needed */
     </style>
-</head>
-
-<body>
-    <form method="POST" enctype="multipart/form-data">
-    <div class="container">
-        <div class="summary-table">
-            <table id="summary1">
-                <tr>
-                    <th>Option</th>
-                    <th>Count</th>
-                </tr>
-                <tr>
-                    <td>Fatal</td>
-                    <td id="summary1-option1">0</td>
-                </tr>
-                <tr>
-                    <td>Medium</td>
-                    <td id="summary1-option2">0</td>
-                </tr>
-                <tr>
-                    <td>Neutral</td>
-                    <td id="summary1-option3">0</td>
-                </tr>
-                <tr>
-                    <td>No Comments</td>
-                    <td id="summary1-option4">0</td>
-                </tr>
-            </table>
-        </div>
-
-        <div class="summary-table">
-            <table id="summary2">
-                <tr>
-                    <th>Option</th>
-                    <th>Count</th>
-                </tr>
-                <tr>
-                    <td>Further Dev</td>
-                    <td id="summary2-option8">0</td>
-                </tr>
-                <tr>
-                    <td>Accepted</td>
-                    <td id="summary2-option5">0</td>
-                </tr>
-                <tr>
-                    <td>Corrected</td>
-                    <td id="summary2-option7">0</td>
-                </tr>
-                <tr>
-                    <td>Rejected</td>
-                    <td id="summary2-option6">0</td>
-                </tr>
-                <tr>
-                    <td>No updates</td>
-                    <td id="summary2-option9">0</td>
-                </tr>
-                <tr>
-                    <td>Not Agreed</td>
-                    <td id="summary2-option11">0</td>
-                </tr>
-            </table>
-        </div>
-    </div>
-
-
-    
-    <div class="container">
-        <div class="table-container">
-            <table id="left"><br>
-                <tr>
-                    <th>Page/Slide</th>
-                    <th>Chapter/Section</th>
-                    <th>Review Comment</th>
-                    <th>Seriousness</th>
-                </tr>
-                <tr>
-                    <td><input type="text" class="custom-color" id="input1"></td>
-                    <td><input type="text" class="custom-color" id="input2"></td>
-                    <td><input type="text" class="custom-color" id="input3"></td>
-                    <td>
-                        <select id="table1-select1" class="custom-color" onchange="updateInputAndDropdownBoxColor(this, '')">
-                            <option value="option1" style="background-color: red; color: white;">Fatal</option>
-                            <option value="option2" style="background-color: blue; color: white;">Medium</option>
-                            <option value="option3" style="background-color: green; color: white;">Neutral</option>
-                            <option value="option4" style="background-color: yellow;">No Comments</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td><input type="text" class="custom-color" id="input4"></td>
-                    
-                    <td><input type="text" class="custom-color" id="input5"></td>
-                    <td><input type="text" class="custom-color" id="input6"></td>
-                    
-                    <td>
-                        <select id="table1-select2" class="custom-color" onchange="updateInputAndDropdownBoxColor(this, '')">
-                            <option value="option1" style="background-color: red; color: white;">Fatal</option>
-                            <option value="option2" style="background-color: blue; color: white;">Medium</option>
-                            <option value="option3" style="background-color: green; color: white;">Neutral</option>
-                            <option value="option4" style="background-color: yellow;">No Comments</option>
-                        </select>
-                    </td>
-                </tr>
-                <!-- Add more rows as needed -->
-            </table>
-        </div>
-
-        <div class="table-container">
-            <table id="right">
-                <tr>
-                    <th>Reviewer's email id</th>
-                    <th>Correction Status</th>
-                    <th>Correction Comments</th>
-                    <th>Agreed with reviewer (to be updated by the reviewer)</th>
-                </tr>
-                <tr>
-                    <td>
-               
-                        {{ current_user.email }}
-                    
-                </td>
-                    <td>
-                        <select id="table2-select1" class="custom-color" onchange="updateInputAndDropdownBoxColor(this, '')">
-                            <option value="option5" style="background-color: blue; color: white;">Accepted</option>
-                            <option value="option6" style="background-color: red; color: white;">Rejected</option>
-                            <option value="option7" style="background-color: green; color: white;">Corrected</option>
-                            <option value="option8" style="background-color: yellow;">Further Dev</option>
-                            <option value="option9" style="background-color: orange;">No Updates Needed</option>
-                        </select>
-                    </td>
-                    <td><input type="text" class="custom-color" id="input8"></td>
-                    <td>
-                        <select id="table2-select2" class="custom-color" onchange="updateInputAndDropdownBoxColor(this, '')">
-                            <option value="option10" style="background-color: green; color: white;">Yes</option>
-                            <option value="option11" style="background-color: red;">No</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td><input type="text" class="custom-color" id="input9"></td>
-                    <td>
-                        <select id="table2-select3" class="custom-color" onchange="updateInputAndDropdownBoxColor(this, '')">
-                            <option value="option5" style="background-color: blue; color: white;">Accepted</option>
-                            <option value="option6" style="background-color: red; color: white;">Rejected</option>
-                            <option value="option7" style="background-color: green; color: white;">Corrected</option>
-                            <option value="option8" style="background-color: yellow;">Further Dev</option>
-                            <option value="option9" style="background-color: orange;">No Updates Needed</option>
-                        </select>
-                    </td>
-                    <td><input type="text" class="custom-color" id="input10"></td>
-                    <td>
-                        <select id="table2-select4" class="custom-color" onchange="updateInputAndDropdownBoxColor(this, '')">
-                            <option value="option10" style="background-color: green; color: white;">Yes</option>
-                            <option value="option11" style="background-color: red;">No</option>
-                        </select>
-                    </td>
-                </tr>
-                <!-- Add more rows as needed -->
-            </table>
-        </div>
-    </div>
-    <div class="container-fluid" style="margin-top:50px">
-        <div class="container" style="padding-left:60px">
-           
-    <button class="btn btn-primary" name="savecomm" id="savecomm" type="submit" onclick="addNewRows()" >savecomm</button>
-</form>   
-</div>
-        </div>
-
 
     <script>
-        // JavaScript function to update the background color of the input box based on the selected option
-        function updateInputAndDropdownBoxColor(selectElement, inputId) {
-            const selectedIndex = selectElement.selectedIndex;
-            const selectedOption = selectElement.options[selectedIndex];
-            const selectedColor = selectedOption.style.backgroundColor;
 
-            // Update the background color of the input box
-            const inputElement = document.getElementById(inputId);
-            inputElement.style.backgroundColor = selectedColor;
+
+        function filterByProjectId() {
+            var input = document.getElementById('local_project_id').value;
+            var rows = document.getElementsByClassName('project-row');
+    
+            for (var i = 0; i < rows.length; i++) {
+                var projectId = rows[i].getAttribute('data-project-id');
+                if (projectId === input) {
+                    rows[i].style.display = '';
+                } else {
+                    rows[i].style.display = 'none';
+                }
+            }
         }
 
 
-        // JavaScript function to add new rows to the tables
-        function addNewRows() {
-            addNewRowToTable('left');
-            addNewRowToTable('right');
+        var summaryCounts = {
+            option1: 0,
+            option2: 0,
+            option3: 0,
+            option4: 0
+        };
+
+        function updateSummary(option) {
+            var summaryOptionId = "summary1-option" + option;
+
+        
+            summaryCounts["option" + option]++;
+
+            
+            for (var i = 1; i <= 4; i++) {
+                document.getElementById("summary1-option" + i).textContent = summaryCounts["option" + i];
+            }
+
+   
+            return false;
         }
+      
 
-        // JavaScript function to add new rows to the tables
-        function addNewRows() {
-            addNewRowToTable('left');
-            addNewRowToTable('right');
-        }
+            var summaryCounts = {
+                option1: 0,
+                option2: 0,
+                option3: 0,
+                option4: 0
+            };
 
-        // JavaScript function to add new rows to the tables
-        function addNewRows() {
-            addNewRowToTable('left');
-            addNewRowToTable('right');
-        }
+            var summary2Counts = {
+                option5: 0,
+                option6: 0,
+                option7: 0,
+                option8: 0,
+                option9: 0,
+                option10: 0,
+                option11: 0
+            };
 
-        // Helper function to add a new row to a specific table
-        function addNewRowToTable(tableId) {
-            const table = document.getElementById(tableId);
-            const lastRow = table.rows[table.rows.length - 1];
-            const newRow = lastRow.cloneNode(true);
+            var notAgreedCount = 0;
 
-            // Generate unique index for the new row
-            const newRowIndex = table.rows.length + 1;
+            function updateSummary(option) {
+                summaryCounts["option" + option]++;
+                updateSummaryDisplay("summary1-option", 4, summaryCounts);
+            }
 
-            // Update IDs for select and input elements
-            const selectElements = newRow.querySelectorAll("select");
-            const inputElements = newRow.querySelectorAll("input");
-            selectElements.forEach((select, index) => {
-                // Get the previous select element's ID and table index
-                const prevSelectId = select.id;
-                const prevSelectIndex = parseInt(prevSelectId.split("-").pop());
-                const tableIndex = parseInt(prevSelectId.split("-")[1]);
+            function updateSummary2(option) {
+                summary2Counts["option" + option]++;
+                updateSummaryDisplay("summary2-option", 11, summary2Counts);
+            }
 
-                // Generate the new unique ID based on the previous ID and table index
-                select.id = `table${tableIndex}-select${newRowIndex}_${index + 1}`;
+            function updateCorrectionCount(option) {
+                updateSummary2(option); // Assuming correction count is part of summary2
+            }
 
-                // Set the corresponding input element's ID for the onchange event
-                select.setAttribute("data-input-id", `input${newRowIndex}_${index + 1}`);
+            function updateNotAgreedCount(response) {
+                notAgreedCount += (response === 'yes') ? 1 : -1;
+                document.getElementById("summary2-option11").textContent = notAgreedCount;
+            }
 
-                // Set the onchange event listener for the newly added select element
-                select.onchange = function() {
-                    const inputId = select.getAttribute("data-input-id");
-                    const inputElement = document.getElementById(inputId);
-                    updateInputAndDropdownBoxColor(selectElement, inputId);
-                };
-            });
+            function updateSummaryDisplay(baseId, count, counts) {
+                for (var i = 1; i <= count; i++) {
+                    document.getElementById(baseId + i).textContent = counts["option" + i];
+                }
+            }
 
-            // Update IDs for input elements only
-            inputElements.forEach((input, index) => {
-                input.id = `input${newRowIndex}_${index + 1}`;
-                input.value = "";
-            });
 
-            // Add the new row to the table
-            table.appendChild(newRow);
-        }
+
+                    
+                var summary2Counts = {
+                    "summary2-option5": 0,
+                "summary2-option6": 0,
+                "summary2-option7": 0,
+                "summary2-option8": 0,
+                "summary2-option9": 0,
+                "summary2-option10": 0,
+                "summary2-option11": 0
+            };
+
+                function updateSummary2(optionId) {
+                    summary2Counts[optionId]++;
+                document.getElementById(optionId).textContent = summary2Counts[optionId];
+            }
+
+                function handleCorrectionStatusChange() {
+                var selectElement = document.getElementById("correctionStatusSelect");
+                var optionId = selectElement.options[selectElement.selectedIndex].value;
+                updateSummary2(optionId);
+            }
+
+
     </script>
-</body>
+    </form>
+    </body>
 
 </html>
+

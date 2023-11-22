@@ -36,7 +36,7 @@
         </div>
     </header>
 
-    <form method="POST" enctype="multipart/form-data">
+    <form method="POST" enctype="multipart/form-data" action={{url_for('views.home')}}>
         <div class="main">
             <div class="column1">
                 <h3 style="padding-left:100px;">Feature Details</h3>
@@ -48,7 +48,7 @@
                     <div class="content">
                         <label for="dropdown1"></label>
                         <select id="dropdown1" name="review_type" >
-                        <option value=""></option>
+                        <option value="">{{ record1[1] }}</option>
                         <option value="New_Review" id="drop1_opt1">New Review</option>
                         <option value="Re_Review" id="drop1_opt2">Re-Review</option>
                     </select>
@@ -61,7 +61,7 @@
                         Title
                     </div>
                     <div class="content">
-                        <input type="text" placeholder="P01:Review tool online" class="input" name="Titleinput">
+                        <input type="text" placeholder="P01:Review tool online" class="input" name='Titleinput' value = {{ record1[2] }}>
                     </div>
                 </div>
 
@@ -82,7 +82,7 @@
                     <div class="content">
                         <label for="dropdown2">label </label>
                         <select id="dropdown2"name="review_type2" >
-                        <option value="{{ owner }}"></option>
+                        <option value="">{{ record1[4] }}</option>
                         <option value="Cloud" id="drop2_opt1">Cloud</option>
                         <option value="Operability" id="drop2_opt2">Operability</option>
                         <option value="RRM_and_Telecom" id="drop2_opt3">RRM_and_Telecom</option>
@@ -111,7 +111,7 @@
                     <div class="content">
                         <label for="dropdown3">Example</label>
                         <select id="dropdown3" name="dropdown3">
-                        <option value=""></option>
+                        <option value="">{{ record1[5] }}</option>
                         <option value="SA/RandT1" id="drop3_opt1">SA/RandT1</option>
                         <option value="SA/RandT2" id="drop3_opt2">SA/RandT2</option>
                         <option value="SA/RandT3" id="drop3_opt3">SA/RandT3</option>
@@ -131,7 +131,7 @@
                     <div class="content">
                         <label for="dropdown4">Example</label>
                         <select id="dropdown4" name="review_type4">
-                        <option value=""></option>
+                        <option value="">{{ record1[6] }}</option>
                         <option value="RA/RandT1" id="drop4_opt1">RA/RandT1</option>
                         <option value="RA/RandT2" id="drop4_opt2">RA/RandT2</option>
                         <option value="RA/RandT3" id="drop4_opt3">RA/RandT3</option>
@@ -144,14 +144,21 @@
                 </div>
 
 
-
+    
                 <div class="container">
                     <div class="text-box" id="release">
                         Release
                     </div>
+            
                     <div class="content">
+                        
+                        <select id="user-select"></select>
+            
+                        <script src="display_data.js"></script>
+            
                         <label for="dropdown5">Release label</label>
                         <select id="dropdown5" name="review_type5">
+                            <option value="">{{ record1[7] }}</option>
                             <option value="23R1" id="drop5_opt1">23R1</option>
                             <option value="23R2" id="drop5_opt2">23R2</option>
                             <option value="23R3" id="drop5_opt3">23R3</option>
@@ -167,47 +174,42 @@
                         </select>
                     </div>
                 </div>
-                
+
+            
 
 
                 
 
-                {% if review_data %}
+
                 <script>
-                // JavaScript to populate the input fields with review_data
-                var reviewData = {{ review_data | tojson | safe }};
-                document.addEventListener("DOMContentLoaded", function() {
-                    console.log(reviewData); // Check if reviewData is populated
-                    document.getElementById('dropdown5').value = reviewData['release_label'];
-                    // Populate other fields similarly
-                });
-                const UpdateButton= document.getElementById('UpdateButton');
+                // display_data.js
+                document.addEventListener("DOMContentLoaded", function () {
+                    // Get user data from Python file (assumes data.py is in the same directory)
+                    fetch('./data.py')
+                        .then(response => response.text())
+                        .then(data => {
+                            // Extract user_data from the Python file
+                            eval(data); // Note: This assumes a simple structure in the Python file
 
-                // Add a click event listener to the button
-                UpdateButton.addEventListener('click', function() {
-                  // Perform a GET request when the button is clicked
-                  // You can replace the URL with the one you want to request
-                  fetch('http://127.0.0.1:5000/', {
-                    method: 'GET'
-                  })
-                  .then(response => {
-                    if (response.ok) {
-                      return response.text(); // or response.json() if the response is JSON
-                    } else {
-                      throw new Error('Network response was not ok');
-                    }
-                  })
-                  .then(data => {
-                    // Handle the data from the response here
-                    console.log(data);
-                  })
-                  .catch(error => {
-                    // Handle any errors that occurred during the fetch
-                    console.error('Error:', error);
-                  });
-    
+                            // Display user data
+                            const userList = document.getElementById('user-list');
+                            user_data.forEach(user => {
+                                const listItem = document.createElement('li');
+                                listItem.textContent = `${user.name}, Age: ${user.age}`;
+                                userList.appendChild(listItem);
+
+                                // Populate select tag with user names
+                                const selectTag = document.getElementById('user-select');
+                                const option = document.createElement('option');
+                                option.value = user.id;
+                                option.textContent = user.name;
+                                selectTag.appendChild(option);
+                            });
+                        })
+                        .catch(error => console.error('Error fetching user data:', error));
+                });
                 </script>
-                {% endif %}
+
                 
 
 
@@ -218,7 +220,7 @@
                     <div class="content">
                         <label for="dropdown6">dropdown here</label>
                         <select id="dropdown6" name="review_type6" >
-                        <option value=""></option>
+                        <option value="">{{ record1[8] }}</option>
                         <option value="4G" id="drop6_opt1">4G</option>
                         <option value="5G" id="drop6_opt2">5G</option>
                         <option value="both" id="drop6_opt3">both 4G and 5G</option>
@@ -235,7 +237,7 @@
                         Review start
                     </div>
                     <div class="content">
-                        <input type="date" placeholder="start date" class="input" name="review_start_date">
+                        <input type="date" placeholder="start date" class="input" name="review_start_date" value= {{ record1[9] }}>
 
                         
                     </div>
@@ -245,7 +247,7 @@
                         Review end
                     </div>
                     <div class="content">
-                        <input type="date" placeholder="end date" class="input" name="review_end_date">
+                        <input type="date" placeholder="end date" class="input" name="review_end_date" value= {{ record1[10] }} >
 
                     </div>
                 </div>
@@ -257,9 +259,11 @@
                         Primary TM
                     </div>
                     <div class="content" style="width:auto">
-                        <input type="email" placeholder="{{owner}}" class="input" id="primaryTMInput" name="primaryTMInput">
+                        <input type="email" placeholder="{{release_label}}" class="input" id="primaryTMInput" name="primaryTMInput" value= {{ record1[11] }}>
                     </div>
                 </div>
+
+
                 <div class="container">
                     <div class="text-box" id="sign_off">
                         Sign off
@@ -267,7 +271,7 @@
                     <div class="content">
                         <label for="dropdown7">dropdown here</label>
                         <select id="dropdown7" name="review_type7" >
-						<option value=""></option>
+						<option value="">{{ record1[12] }}</option>
 						<option value="yes" id="drop7_opt1">Yes</option>
 						<option value="no" id="drop7_opt2">No</option>
 						<option value="ongoing" id="drop7_opt3">Review Ongoing</option>
@@ -282,7 +286,7 @@
                         Review Summary
                     </div>
                     <div class="content review" style="width:auto">
-                        <input type="email" placeholder="review summary" class="input" id="reviewSummaryInput" name="reviewSummaryInput" style="background-color:green">
+                        <input type="email" placeholder="review summary" class="input" id="reviewSummaryInput" name="reviewSummaryInput" style="background-color:green" value= {{ record1[13] }}>
                     </div>
                 </div>
             </div>
@@ -380,22 +384,22 @@
             <h3 style="padding-left:100px">Mandatory Reviewers</h3>
             <div class="container-fluid">
                 <div class="container">
-                    <div class="text-box" id="technical_manager">
+                    <div class="text-box" id="technical_manager" name ="technical_manager" >
                         Technical Manager
                     </div>
                     <div class="content">
-                        <input type="start date" placeholder="" class="input" id="managerinput">
+                        <input type="start date" placeholder="" class="input" id="technical_manager" name ="technical_manager" value = {{record1[14]}}>
                     </div>
                     <div class="text-box" id="manager_review">
                         Reviewed/To be Reviewed
                     </div>
                 </div>
                 <div class="container">
-                    <div class="text-box" id="ra_lead4g">
+                    <div class="text-box" id="ra_lead4g" name = 'ra_lead4g'>
                         RA Lead(4G)
                     </div>
                     <div class="content">
-                        <input type="start date" placeholder="" class="input" id="ralead4ginput">
+                        <input type="start date" placeholder="" class="input" id="ra_lead4g" name = 'ra_lead4g' value = {{record1[15]}}>
                     </div>
                     <div class="text-box" id="ralead4g_review">
                         Reviewed/To be Reviewed
@@ -407,7 +411,7 @@
                         RA Lead(5G)
                     </div>
                     <div class="content">
-                        <input type="start date" placeholder="" class="input" id="ralead5ginput">
+                        <input type="start date" placeholder="" class="input" id="ralead5ginput" name = 'ra_lead5g' value = {{record1[16]}}>
 
                     </div>
                     <div class="text-box" id="ralead5g_review">
@@ -419,7 +423,7 @@
                         FS1TA Owner
                     </div>
                     <div class="content">
-                        <input type="start date" placeholder="" class="input" id="fs1tainput">
+                        <input type="start date" placeholder="" class="input" id="fs1tainput" name="fs1tainput" value = {{record1[17]}}>
 
                     </div>
                     <div class="text-box" id="fs1ta_review">
@@ -443,7 +447,7 @@
                         System Architect
                     </div>
                     <div class="content">
-                        <input type="start date" placeholder="" class="input" id="architectinput">
+                        <input type="start date" placeholder="" class="input" id="architectinput" name = 'architectinput' value = {{record1[18]}}>
 
                     </div>
                     <div class="text-box" id="system_architect_review">
@@ -455,7 +459,7 @@
                         Other Mandatory
                     </div>
                     <div class="content">
-                        <input type="start date" placeholder="" class="input" id="otherinput">
+                        <input type="start date" placeholder="" class="input" id="otherinput" name = 'otherinput'value = {{record1[19]}}>
 
                     </div>
                     <div class="text-box" id="other_mandatory_review">
@@ -471,7 +475,7 @@
                         FST
                     </div>
                     <div class="content">
-                        <input type="start date" placeholder="" class="input" id="fstinput">
+                        <input type="start date" placeholder="" class="input" id="fstinput" name = 'fstinput' value = {{record1[20]}}>
                     </div>
 
                 </div>
@@ -480,15 +484,15 @@
                         APO
                     </div>
                     <div class="content">
-                        <input type="end date" placeholder="" class="input" id="apoinput">
+                        <input type="end date" placeholder="" class="input" id="apoinput" name='apoinput' value = {{record1[21]}}>
                     </div>
                 </div>
                 <div class="container">
-                    <div class="text-box" id="other_opt">
+                    <div class="text-box" id="other_opt" name = 'other_opt'>
                         Other Optional
                     </div>
                     <div class="content">
-                        <input type="end date" placeholder="" class="input" id="optionalinput">
+                        <input type="end date" placeholder="" class="input" id="optionalinput" name='optionalinput' value = {{record1[22]}}>
                     </div>
                 </div>
             </div>
@@ -496,22 +500,22 @@
             <div class="container-fluid">
                 <h3 style="padding-left:100px">Conditional Reviewers</h3>
                 <div class="container">
-                    <div class="text-box" id="conditional_comp1">
+                    <div class="text-box" id="Comp1" name = 'Comp1'>
                         Comp1
                     </div>
                     <div class="content">
-                        <input type="start date" placeholder="" class="input" id="Comp1">
+                        <input type="start date" placeholder="" class="input" id="Comp1" name = 'Comp1'value = {{record1[23]}}>
                     </div>
                     <div class="text-box" id="conditional_review1">
                         Reviewed/To be Reviewed
                     </div>
                 </div>
                 <div class="container">
-                    <div class="text-box" id="conditional_comp2">
+                    <div class="text-box" id="Comp2">
                         Comp2
                     </div>
                     <div class="content">
-                        <input type="start date" placeholder="" class="input" id="Comp2">
+                        <input type="start date" placeholder="" class="input" id="Comp2" name = 'Comp2' value = {{record1[24]}}>
                     </div>
                     <div class="text-box" id="conditional_review2">
                         Reviewed/To be Reviewed
@@ -519,11 +523,11 @@
                 </div>
 
                 <div class="container">
-                    <div class="text-box" id="conditional_comp3">
+                    <div class="text-box" id="Comp3">
                         Comp3
                     </div>
                     <div class="content">
-                        <input type="start date" placeholder="" class="input" id="Comp3">
+                        <input type="start date" placeholder="" class="input" id="Comp3" name= 'Comp4' value = {{record1[25]}}>
 
                     </div>
                     <div class="text-box" id="conditional_review3">
@@ -531,11 +535,11 @@
                     </div>
                 </div>
                 <div class="container">
-                    <div class="text-box" id="conditional_comp4">
+                    <div class="text-box" id="Comp4">
                         Comp4
                     </div>
                     <div class="content">
-                        <input type="start date" placeholder="" class="input" id="Comp4">
+                        <input type="start date" placeholder="" class="input" id="Comp4" name = 'Comp4' value = {{record1[26]}}>
 
                     </div>
                     <div class="text-box" id="conditional_review4">
@@ -543,11 +547,11 @@
                     </div>
                 </div>
                 <div class="container">
-                    <div class="text-box" id="conditional_comp5">
+                    <div class="text-box" id="Comp5">
                         Comp5
                     </div>
                     <div class="content">
-                        <input type="start date" placeholder="" class="input" id="Comp5">
+                        <input type="start date" placeholder="" class="input" id="Comp5" name = 'Comp5' value = {{record1[27]}}>
 
                     </div>
                     <div class="text-box" id="conditional_review5">
@@ -555,11 +559,11 @@
                     </div>
                 </div>
                 <div class="container">
-                    <div class="text-box" id="conditional_comp6">
+                    <div class="text-box" id="Comp6">
                         Comp6
                     </div>
                     <div class="content">
-                        <input type="start date" placeholder="" class="input" id="Comp6">
+                        <input type="start date" placeholder="" class="input" id="Comp6" name = 'Comp6' value = {{record1[28]}}>
 
                     </div>
                     <div class="text-box" id="conditional_review6">
@@ -567,11 +571,11 @@
                     </div>
                 </div>
                 <div class="container">
-                    <div class="text-box" id="conditional_comp7">
+                    <div class="text-box" id="Comp7">
                         Comp7
                     </div>
                     <div class="content">
-                        <input type="start date" placeholder="" class="input" id="Comp7">
+                        <input type="start date" placeholder="" class="input" id="Comp7" name = 'Comp7'value = {{record1[29]}}>
 
                     </div>
                     <div class="text-box" id="conditional_review7">
