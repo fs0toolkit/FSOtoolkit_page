@@ -41,6 +41,7 @@ def sql_connector():
 
 def home():
     record = []
+    concatenated_str = ""
     if request.method == 'POST':
         print("inside teh ")
         if 'ResetButton' in request.form:
@@ -202,7 +203,7 @@ def home():
             else:
                 flash('No rec   ord found for the specified criteria.', category='error')
                 
-
+        
 
         elif 'StatusButton' in request.form:
             conn, c = sql_connector()
@@ -243,7 +244,7 @@ def home():
             print(concatenated_str)
             
 
-    return render_template('home.html', user=current_user  , record1 = record)
+    return render_template('home.html', user=current_user  , record1 = record ,concatenated_str = concatenated_str)
 
 
 
