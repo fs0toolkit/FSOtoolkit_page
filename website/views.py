@@ -59,6 +59,7 @@ def home():
 
             # Your existing code
             review_type = request.form.get('review_type')
+            Proj_id = request.form.get('Proj_id')
             title = request.form.get('Titleinput')
             owner = current_user.email
             category = request.form.get('review_type2')
@@ -69,9 +70,24 @@ def home():
             primary_tm = request.form.get('primaryTMInput')
             sign_off = request.form.get('review_type7')
             review_summary = request.form.get('reviewSummaryInput')
-
             # Add the new columns
- 
+            technical_manager = request.form.get('technical_manager')
+            ra_lead_4g = request.form.get('ra_lead4g')
+            ra_lead_5g = request.form.get('ra_lead5g')
+            fs1ta_owner = request.form.get('fs1tainput')
+            system_architect = request.form.get('architectinput')
+            other_mandatory = request.form.get('otherinput')
+            optional_reviewers = request.form.get('otherinput')
+            fst = request.form.get('fstinput')
+            apo = request.form.get('apoinput')
+            other_optional = request.form.get('optionalinput')
+            comp1 = request.form.get('Comp1')
+            comp2 = request.form.get('Comp2')
+            comp3 = request.form.get('Comp3')
+            comp4 = request.form.get('Comp4')
+            comp5 = request.form.get('Comp5')
+            comp6 = request.form.get('Comp6')
+            comp7 = request.form.get('Comp7')
 
             c.execute("""
                 INSERT INTO reviews (
@@ -80,15 +96,15 @@ def home():
                     primary_tm, sign_off, review_summary,
                     technical_manager, ra_lead_4g, ra_lead_5g, fs1ta_owner, system_architect,
                     other_mandatory, optional_reviewers, fst, apo, other_optional,
-                    comp1, comp2, comp3, comp4, comp5, comp6, comp7
-                ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s,%s,%s)
+                    comp1, comp2, comp3, comp4, comp5, comp6, comp7 ,proj_id
+                ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s,%s,%s,%s)
             """, (
                 review_type, title, owner, category, sol_area, req_area,
                 release_label, rat, review_start_date, review_end_date,
                 primary_tm, sign_off, review_summary,
                 technical_manager, ra_lead_4g, ra_lead_5g, fs1ta_owner, system_architect,
                 other_mandatory, optional_reviewers, fst, apo, other_optional,
-                comp1, comp2, comp3, comp4, comp5, comp6, comp7
+                comp1, comp2, comp3, comp4, comp5, comp6, comp7,Proj_id
             ))
 
 
@@ -180,7 +196,7 @@ def home():
             print(type(record))
             if record:
                 # Unpack the record, assuming it has the expected number of values
-                num, review_type, title, owner,  _, _, _, release_label, rat, review_start_date, review_end_date, primary_tm, sign_off, review_summary ,technical_manager, ra_lead_4g, ra_lead_5g, fs1ta_owner, system_architect, other_mandatory, optional_reviewers, fst, apo, other_optional, comp1, comp2, comp3, comp4, comp5, comp6, comp7 = record
+                num, review_type, title, owner,  _, _, _, release_label, rat, review_start_date, review_end_date, primary_tm, sign_off, review_summary ,technical_manager, ra_lead_4g, ra_lead_5g, fs1ta_owner, system_architect, other_mandatory, optional_reviewers, fst, apo, other_optional, comp1, comp2, comp3, comp4, comp5, comp6, comp7,Proj_id = record
 
                 flash('Record found!', category='success')
             else:
@@ -190,17 +206,46 @@ def home():
 
         elif 'StatusButton' in request.form:
             conn, c = sql_connector()
-            stat= list(c.fetchall())
             c.execute("SELECT * FROM comments;")
             Proj_id = request.form.get('Proj_id')
+            print(Proj_id)
+
+            # Initialize an empty list to store the details
+            details_list = []
+
+            # Fetch all rows from the comments table
+            all_comments = c.fetchall()
+            # print(all_comments)
+            # Iterate through each row
+            # print(len(all_comments[0]))
+            
+            for comment in all_comments:
+                # Check if the Proj_id matches the desired value
+                # print(f"{comment[0]} == {Proj_id}")
+                # print(comment[0])
+                # print(Proj_id)
+                if int(comment[0]) == int(Proj_id):
+                    # If a match is found, append all details of that row to the list
+                    details_list.append(comment[1])
+                    # print(comment )
+            # print(details_list)
+            # Initialize an empty string to store concatenated values
+            concatenated_str = ""
+
+            # Iterate through the collected details and concatenate specific column values
+            for details in details_list:
+                concatenated_str += details[2]  # Adjust the index based on the desired column
+
             conn.commit()
             conn.close()
-            
 
-            print(stat)
+            # print(details_list)
+            print(concatenated_str)
             
 
     return render_template('home.html', user=current_user  , record1 = record)
+
+
 
 # Route for the comment page (requires login)
 @views.route('/comment', methods=['GET', 'POST'])
