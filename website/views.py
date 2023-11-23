@@ -16,16 +16,13 @@ from flask_mysqldb import MySQL
 
 views = Blueprint('views', __name__)
 
-
-
-
 # Define your Office 365 API endpoint and version
 api_endpoint = "https://outlook.office365.com/api/v2.0/me/sendmail"
 
 # Define your Azure AD settings
-tenant_id = "YOUR_TENANT_ID"
-client_id = "YOUR_CLIENT_ID"
-client_secret = "YOUR_CLIENT_SECRET"
+tenant_id = "f8cdef31-a31e-4b4a-93e4-5f571e91255a"
+client_id = "a0e4b12a-5afa-4590-9a27-4763c8584c99"
+client_secret = "IrV8Q~0TeSOk1NBC.jYHp.YM0sgIqWVsZKg7McSq"
 resource = "https://outlook.office365.com/"
 
 
@@ -35,17 +32,6 @@ def sql_connector():
     c = conn.cursor()
     return conn, c
 
-
-
-heading = []
-
-
-# Register a function to run before each request
-@views.before_request
-def before_request():
-    # Add any code you want to run before each request here
-    # For example, you can define the 'heading' variable here
-    setattr(current_app, 'heading', ("Project ID", "Page/Slide", "Chapter/Section", "Review Comment", "Seriousness", "Reviewers email id", "Correction Status", "Correction Comments", "Agreed with reviewer (to be updated by the reviewer)"))
 
 
 
@@ -70,9 +56,6 @@ def home():
             # Assuming you have a function sql_connector() that returns the connection and cursor
             conn, c = sql_connector()
 
-            # Extracting the missing variables from your existing code
-            # review_start_date = request.form.get('start_date')
-            # review_end_date = request.form.get('end_date')
 
             # Your existing code
             review_type = request.form.get('review_type')
@@ -88,23 +71,7 @@ def home():
             review_summary = request.form.get('reviewSummaryInput')
 
             # Add the new columns
-            technical_manager = request.form.get('technical_manager')
-            ra_lead_4g = request.form.get('ra_lead4g')
-            ra_lead_5g = request.form.get('ra_lead5g')
-            fs1ta_owner = request.form.get('fs1tainput')
-            system_architect = request.form.get('architectinput')
-            other_mandatory = request.form.get('otherinput')
-            optional_reviewers = request.form.get('otherinput')
-            fst = request.form.get('fstinput')
-            apo = request.form.get('apoinput')
-            other_optional = request.form.get('optionalinput')
-            comp1 = request.form.get('Comp1')
-            comp2 = request.form.get('Comp2')
-            comp3 = request.form.get('Comp3')
-            comp4 = request.form.get('Comp4')
-            comp5 = request.form.get('Comp5')
-            comp6 = request.form.get('Comp6')
-            comp7 = request.form.get('Comp7')
+ 
 
             c.execute("""
                 INSERT INTO reviews (
@@ -191,7 +158,6 @@ def home():
         elif 'UpdateButton' in request.form:
 
             num = 0
-            print("Jai shreeram\n")
             # Capture form data for retrieving an existing record
             category = request.form.get('review_type2')
             sol_area = request.form.get('dropdown3')
@@ -208,11 +174,8 @@ def home():
                 WHERE sol_area = %s AND req_area = %s AND category = %s
             """, (sol_area, req_area, category))
             
-            # record = c.fetchone()
-
             record= list(c.fetchone())
 
-            print("helolegbvsghsergwago1 \n")
             print(record)
             print(type(record))
             if record:
@@ -221,11 +184,22 @@ def home():
 
                 flash('Record found!', category='success')
             else:
-                flash('No record found for the specified criteria.', category='error')
+                flash('No rec   ord found for the specified criteria.', category='error')
+                
+
+
+        elif 'StatusButton' in request.form:
+            conn, c = sql_connector()
+            stat= list(c.fetchall())
+            c.execute("SELECT * FROM comments;")
+            conn.commit()
+            conn.close()
             
+
+            print(stat)
+            
+
     return render_template('home.html', user=current_user  , record1 = record)
-
-
 
 # Route for the comment page (requires login)
 @views.route('/comment', methods=['GET', 'POST'])
@@ -233,26 +207,25 @@ def home():
 def comment():
     record2 = []
     heading = ("Project ID", "Page/Slide", "Chapter/Section", "Review Comment", "Seriousness", "Reviewers email id", "Correction Status", "Correction Comments", "Agreed with reviewer (to be updated by the reviewer)")
-    # heading = []
+    local_project_id = request.form.get('local_project_id')
+    id1 = request.form.get('id1')
+    # Connect to the database
     conn, c = sql_connector()
+
+    # Retrieve all records from the comments table
     c.execute("SELECT * FROM comments;")
-    conn.commit()
+    record2 = list(c.fetchall())
+
+    # Close the database connection
     conn.close()
 
-    record2= list(c.fetchall())
-    print(record2)
-
+    # Process the input if the request method is POST
     if request.method == 'POST':
-
-        print("inside teh ")
         if 'savecomm' in request.form:
-            print("submiButton")
-
-            
-            # Assuming you have a function sql_connector() that returns the connection and cursor
+            # Connect to the database again for inserting a new record
             conn, c = sql_connector()
 
-                        # Your existing code
+            # Get form data
             id1 = request.form.get('id1')
             Pages1 = request.form.get('page1')
             chapt1 = request.form.get('chapt1')
@@ -262,7 +235,8 @@ def comment():
             corr_stat = request.form.get('corr_stat')
             corr_comm = request.form.get('corr_comm')
             agree = request.form.get('agree')
-
+            local_project_id = request.form.get('local_project_id')
+            print("\n Local Project ID:", local_project_id)
             # Insert query
             c.execute("""
                 INSERT INTO comments (
@@ -273,34 +247,15 @@ def comment():
                 id1, Pages1, chapt1, rc1, seri, rev_email, corr_stat, corr_comm, agree
             ))
 
-
             # Commit the transaction and close the connection
             conn.commit()
-            
-
-
+            conn.close()
 
             flash('Review added!', category='success')
-            # heading = ("Project ID", "Page/Slide", "Chapter/Section", "Review Comment", "Seriousness", "Reviewers email id", "Correction Status", "Correction Comments", "Agreed with reviewer (to be updated by the reviewer)")
-            # record2= list(c.fetchall())
-            # print(record2)
-            # print(type(record2))
-            # if record2:
-            # #     # Unpack the record, assuming it has the expected number of values
-            #     Pages1, chapt1, rc1, seri, rev_email,corr_stat, corr_comm, agree= record2
 
-            #     flash('Record found!', category='success')
-            # else:
-            #     flash('No record found for the specified criteria.', category='error')
-            conn.close()
-        elif 'submit' in request.form:
-            local_project_id = request.form.get('local_project_id')
-            print("Local Project ID:", local_project_id)
-    # # Process the input or use it as needed
-            local_project_id = int (local_project_id)
-            # return render_template('comment.html', local_project_id=local_project_id)
+    # Render the template with the retrieved records and other data
+    return render_template('comment.html', user=current_user, record2=record2, heading=heading)
 
-    return render_template('comment.html', user=current_user , record2 = record2 , heading= heading , local_project_id=local_project_id )
 
 @login_required
 @views.route('/process_input', methods=['POST'])
