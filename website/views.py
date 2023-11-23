@@ -192,6 +192,7 @@ def home():
             conn, c = sql_connector()
             stat= list(c.fetchall())
             c.execute("SELECT * FROM comments;")
+            Proj_id = request.form.get('Proj_id')
             conn.commit()
             conn.close()
             
@@ -217,7 +218,6 @@ def comment():
     record2 = list(c.fetchall())
 
     # Close the database connection
-    conn.close()
 
     # Process the input if the request method is POST
     if request.method == 'POST':
@@ -254,7 +254,7 @@ def comment():
             flash('Review added!', category='success')
 
     # Render the template with the retrieved records and other data
-    return render_template('comment.html', user=current_user, record2=record2, heading=heading)
+    return render_template('comment.html', user=current_user, record2=record2, heading=heading ,local_project_id = local_project_id)
 
 
 @login_required
@@ -263,8 +263,22 @@ def process_input():
     local_project_id = request.form.get('local_project_id')
     print("Local Project ID:", local_project_id)
     # Process the input or use it as needed
+    record2 = []
+    heading = ("Project ID", "Page/Slide", "Chapter/Section", "Review Comment", "Seriousness", "Reviewers email id", "Correction Status", "Correction Comments", "Agreed with reviewer (to be updated by the reviewer)")
+    local_project_id = request.form.get('local_project_id')
+    local_project_id = int(local_project_id)
+    id1 = request.form.get('id1')
+    # Connect to the database
+    conn, c = sql_connector()
 
-    return render_template('comments.html', local_project_id=local_project_id)
+    # Retrieve all records from the comments table
+    c.execute("SELECT * FROM comments;")
+    record2 = list(c.fetchall())
+    print(record2)
+    # Close the database connection
+    conn.close()
+
+    return render_template('comment.html', record2=record2 ,local_project_id=local_project_id)
 
 # @views.route('/comment', methods=['GET', 'POST'])
 # @login_required

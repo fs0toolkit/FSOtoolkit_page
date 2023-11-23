@@ -35,9 +35,6 @@
     </header>
 
     <body>
-
-        
-
             <div class="container">
                 <div class="summary-table">
                     <table id="summary1">
@@ -97,26 +94,21 @@
                     </table>
                 </div>
             </div>
+
+
             <form action="{{ url_for('views.process_input') }}" method="post">
                 <label for="local_project_id">Enter Local Project ID:</label>
                 <input type="text" name="local_project_id" id="local_project_id">
                 <button type="submit" name="submit" id="submit">Submit</button>
-        </form>
-
-        <form method="POST" enctype="multipart/form-data" >
+            </form>
+            
             <div class="table-container">
-                <table id="right">
-                    <br>
+                <table id="right1">
                     {{local_project_id}}
-                    <tr>
-                        {{local_project_id}}
-                        {% for i in heading %}
-                            <th>{{ i }}</th>
-                        {% endfor %}
-                    </tr>
                     {% for j in record2 %}
-                        {% set project_id = j[0] %}  {# Assuming the project_id is the first element in the row #}
-                        {% if  local_project_id == project_id   %}
+                        {% set project_id = j[0] %}  
+                        {# Assuming the project_id is the first element in the row #}
+                        {% if  local_project_id == project_id %}
                             <tr>
                                 {% for k in j %}
                                     <td>{{ k }}</td>
@@ -124,7 +116,27 @@
                             </tr>
                         {% endif %}
                     {% endfor %}
+                </table>
+            
+            </div>
+            
 
+        <form method="POST" action="{{ url_for('views.comment') }}"  enctype="multipart/form-data" >
+            <div class="table-container">
+                <table id="right2">
+                    <tr>
+                        <tr>
+                            <th>Project ID</th>
+                            <th>Page/Slide</th>
+                            <th>Chapter/Section</th>
+                            <th>Review Comment</th>
+                            <th>Seriousness</th>
+                            <th>Reviewer's email id</th>
+                            <th>Correction Status</th>
+                            <th>Correction Comments</th>
+                            <th>Agreed with reviewer (to be updated by the reviewer)</th>
+                        </tr>
+                    </tr>
                         <tr>
                             <td><input type="text" class="custom-color" id="id1" name='id1' value={{ id1 }}></td>
                             <td><input type="text" class="custom-color" id="input1" name='page1' value={{ Pagesl }}></td>
