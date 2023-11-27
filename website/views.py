@@ -43,9 +43,7 @@ def home():
     record = []
     concatenated_str = ""
     if request.method == 'POST':
-        print("inside teh ")
         if 'ResetButton' in request.form:
-            print("ResetButton")
             
             try:
                 review_start_date = datetime.strptime(request.form.get('review_start_date'), '%Y-%m-%d')
@@ -119,25 +117,57 @@ def home():
 
             
         elif 'EmailButton' in request.form:
-            print("in draft email")
-                        # Get the owner's email from the logged-in user
-            owner = current_user.email  # Replace this with your actual method of getting the owner's email
-            
-            # Get the primary_tm email from the form
-            primary_tm = request.form.get('primaryTMInput')
-            
-            # Authenticate with Azure AD to get an access token
-            authority_url = f"https://login.microsoftonline.com/{tenant_id}"
-            context = adal.AuthenticationContext(authority_url)
-            token = context.acquire_token_with_client_credentials(
-                resource,
-                client_id,
-                client_secret
-            )
 
+
+            # Get the owner's email from the logged-in user
+            # Make sure to replace this with your actual method of getting the owner's email
+            owner = current_user.email  
+
+            # Get other form inputs
+            primary_tm = request.form.get('primaryTMInput')
+            technical_manager = request.form.get('technical_manager')
+            ra_lead_4g = request.form.get('ra_lead4g')
+            ra_lead_5g = request.form.get('ra_lead5g')
+            fs1ta_owner = request.form.get('fs1tainput')
+            system_architect = request.form.get('architectinput')
+            other_mandatory = request.form.get('otherinput')
+            optional_reviewers = request.form.get('optional_reviewers')  # Corrected variable name
+            fst = request.form.get('fstinput')
+            apo = request.form.get('apoinput')
+            other_optional = request.form.get('optionalinput')
+            comp1 = request.form.get('Comp1')
+            comp2 = request.form.get('Comp2')
+            comp3 = request.form.get('Comp3')
+            comp4 = request.form.get('Comp4')
+            comp5 = request.form.get('Comp5')
+            comp6 = request.form.get('Comp6')
+            comp7 = request.form.get('Comp7') 
+
+            # Combine all recipients into a list
+            to_recipients = [
+                {"EmailAddress": {"Address": technical_manager}},
+                {"EmailAddress": {"Address": ra_lead_4g}},
+                {"EmailAddress": {"Address": ra_lead_5g}},
+                {"EmailAddress": {"Address": fs1ta_owner}},
+                {"EmailAddress": {"Address": system_architect}},
+                {"EmailAddress": {"Address": other_mandatory}},
+                {"EmailAddress": {"Address": optional_reviewers}},
+                {"EmailAddress": {"Address": fst}},
+                {"EmailAddress": {"Address": apo}},
+                {"EmailAddress": {"Address": other_optional}},
+                {"EmailAddress": {"Address": comp1}},
+                {"EmailAddress": {"Address": comp2}},
+                {"EmailAddress": {"Address": comp3}},
+                {"EmailAddress": {"Address": comp4}},
+                {"EmailAddress": {"Address": comp5}},
+                {"EmailAddress": {"Address": comp6}},
+                {"EmailAddress": {"Address": comp7}},
+            ]
+
+            # Authenticate with Azure AD to get an access token
+        
             # Create a draft email
             headers = {
-                "Authorization": f"Bearer {token['access_token']}",
                 "Content-Type": "application/json",
             }
 
@@ -148,28 +178,33 @@ def home():
                         "ContentType": "Text",
                         "Content": "Your email content here."
                     },
-                    "ToRecipients": [
-                        {
-                            "EmailAddress": {
-                                "Address": primary_tm  # Use the primary_tm email as the recipient
-                            }
-                        }
-                    ],
+                    "ToRecipients": to_recipients,
                     "From": {
                         "EmailAddress": {
-                            "Address": owner  # Use the owner's email as the sender
+                            "Address": primary_tm  # Use the owner's email as the sender
                         }
                     }
                 },
                 "SaveToSentItems": "false"
             }
 
-            response = requests.post(api_endpoint, json=email_data, headers=headers)
+            # Set your Outlook API endpoint here
+            api_endpoint = "https://your-outlook-api-endpoint.com"  # Replace with your actual API endpoint
 
-            if response.status_code == 201:
-                return "Draft email created successfully."
-            else:
-                return "Error creating draft email. Status code:", response.status_code
+            outlook_link = "https://outlook.live.com/mail/0/"
+            email_data["Message"]["OutlookLink"] = outlook_link
+
+            # response = requests.post(api_endpoint, json=email_data, headers=headers)
+
+            # if response.status_code == 201:
+            #     return "Draft email created successfully."
+            # else:
+            #     return f"Error creating draft email. Status code: {response.status_code}"
+
+
+            return redirect(outlook_link)
+
+
 
 
         elif 'UpdateButton' in request.form:
@@ -206,45 +241,39 @@ def home():
         
 
         elif 'StatusButton' in request.form:
+            # Establish a connection to the database
             conn, c = sql_connector()
+
+            # Retrieve all comments from the comments table
             c.execute("SELECT * FROM comments;")
             Proj_id = request.form.get('Proj_id')
-            print(Proj_id)
 
-            # Initialize an empty list to store the details
+            # Initialize a list to store details related to the specified project
             details_list = []
 
             # Fetch all rows from the comments table
             all_comments = c.fetchall()
-            # print(all_comments)
-            # Iterate through each row
-            # print(len(all_comments[0]))
-            
+
+            # Iterate through all comments
             for comment in all_comments:
                 # Check if the Proj_id matches the desired value
-                # print(f"{comment[0]} == {Proj_id}")
-                # print(comment[0])
-                # print(Proj_id)
                 if int(comment[0]) == int(Proj_id):
-                    # If a match is found, append all details of that row to the list
+                    # Append relevant details to the list
                     details_list.append(comment[1])
-                    # print(comment )
-            # print(details_list)
-            # Initialize an empty string to store concatenated values
+
+            # Initialize an empty string to concatenate specific column values
             concatenated_str = ""
 
-            # Iterate through the collected details and concatenate specific column values
+            # Iterate through collected details and concatenate specific column values
             for details in details_list:
                 concatenated_str += details[2]  # Adjust the index based on the desired column
 
+            # Commit changes and close the database connection
             conn.commit()
             conn.close()
 
-            # print(details_list)
-            print(concatenated_str)
-            
-
-    return render_template('home.html', user=current_user  , record1 = record ,concatenated_str = concatenated_str)
+            # Render the home template with updated information
+    return render_template('home.html', user=current_user, record1=record, concatenated_str=concatenated_str)
 
 
 
