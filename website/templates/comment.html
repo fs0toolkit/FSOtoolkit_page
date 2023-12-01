@@ -143,12 +143,12 @@
                             <td><input type="text" class="custom-color" id="input2" name='chapt1' value={{ chapt1 }}></td>
                             <td><input type="text" class="custom-color" id="input3"  name= 'rc1' value={{ rc1 }} ></td>
                             <td>
-                                <select name="severity" id="severitySelect" onchange="updateSummary(this.value)" name= 'seri'>
-                                    <option >{{fatal1}}</option>
-                                    <option value="1" style="background-color: red; color: white;">Fatal</option>
-                                    <option value="2" style="background-color: blue; color: white;">Medium</option>
-                                    <option value="3" style="background-color: green; color: white;">Neutral</option>   
-                                    <option value="4" style="background-color: yellow;">No Comments</option>
+                                <select  id="seri" onchange="updateSummary(this.value)" name= 'seri' value={{seri}}>
+                                    <option >{{seri}}</option>
+                                    <option value="option1" style="background-color: red; color: white;">Fatal</option>
+                                    <option value="option2" style="background-color: blue; color: white;">Medium</option>
+                                    <option value="option3" style="background-color: green; color: white;">Neutral</option>   
+                                    <option value="option4" style="background-color: yellow;">No Comments</option>
                                 </select>
                             </td>
                             <td>
@@ -157,8 +157,9 @@
     
                             </td>
                             <td>
-                                <select id="table2-select1" class="custom-color" onchange="updateInputAndDropdownBoxColor(this, '')"  name= 'corr_stat'>
-                                    <option value="option5" style="background-color: blue; color: white;">Accepted</option>
+                                <select id="table2-select1" class="custom-color" onchange="updateInputAndDropdownBoxColor(this, '')"  name= 'corr_stat' value = {{corr_stat}}>
+                                    <option >{{corr_stat}}</option>
+                                    <option value="option5" style="background-color: blue; color: white;" name = 'Accepted '>Accepted</option>
                                     <option value="option6" style="background-color: red; color: white;">Rejected</option>
                                     <option value="option7" style="background-color: green; color: white;">Corrected</option>
                                     <option value="option8" style="background-color: yellow;">Further Dev</option>

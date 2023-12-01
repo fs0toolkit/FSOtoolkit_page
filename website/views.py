@@ -222,7 +222,7 @@ def home():
             # Retrieve a record from the 'reviews' table based on the combination of criteria
             c.execute("""
                 SELECT *
-                FROM reviews
+                FROM review1
                 WHERE sol_area = %s AND req_area = %s AND category = %s
             """, (sol_area, req_area, category))
             
@@ -241,18 +241,25 @@ def home():
         
 
         elif 'StatusButton' in request.form:
-            # Establish a connection to the database
+            # Establish a connection to the database 
+
             conn, c = sql_connector()
 
             # Retrieve all comments from the comments table
             c.execute("SELECT * FROM comments;")
             Proj_id = request.form.get('Proj_id')
+            
+
 
             # Initialize a list to store details related to the specified project
             details_list = []
 
             # Fetch all rows from the comments table
             all_comments = c.fetchall()
+
+
+
+
 
             # Iterate through all comments
             for comment in all_comments:
@@ -267,6 +274,18 @@ def home():
             # Iterate through collected details and concatenate specific column values
             for details in details_list:
                 concatenated_str += details[2]  # Adjust the index based on the desired column
+
+
+            k =0
+            for  i in range(len(all_comments)):
+                if all_comments[0] == int(Proj_id):
+                    k+=1
+            if  (k>11) and all_comments[4] == 'option1' :
+                concatenated_str = "Available mandatory reviewers reviewed \n Marked conditional reviewers reviewed \n No non-addressed comments\n No Rejection/Further Dev pending"
+            elif (k>11) and all_comments[4] != 'option1':
+                concatenated_str = "Available mandatory reviewers reviewed \n Marked conditional reviewers reviewed \n yes their is non-addressed comments\n yes Rejection/Further Dev pending"
+            else:
+                concatenated_str = "Available mandatory reviewers did't reviewed \n Marked conditional not reviewers reviewed \n No non-addressed comments\n No Rejection/Further Dev pending"
 
             # Commit changes and close the database connection
             conn.commit()
