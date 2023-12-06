@@ -193,20 +193,16 @@
                 <script>
                 // display_data.js
                 document.addEventListener("DOMContentLoaded", function () {
-                    // Get user data from Python file (assumes data.py is in the same directory)
                     fetch('./data.py')
-                        .then(response => response.text())
-                        .then(data => {
-                            // Extract user_data from the Python file
-                            eval(data); // Note: This assumes a simple structure in the Python file
-
+                        .then(response => response.json())  // Assuming data.py contains valid JSON
+                        .then(user_data => {
                             // Display user data
                             const userList = document.getElementById('user-list');
                             user_data.forEach(user => {
                                 const listItem = document.createElement('li');
                                 listItem.textContent = `${user.name}, Age: ${user.age}`;
                                 userList.appendChild(listItem);
-
+                
                                 // Populate select tag with user names
                                 const selectTag = document.getElementById('user-select');
                                 const option = document.createElement('option');
@@ -215,8 +211,9 @@
                                 selectTag.appendChild(option);
                             });
                         })
-                        .catch(error => console.error('Error fetching user data:', error));
+                        .catch(error => console.error('Error fetching or parsing user data:', error));
                 });
+                
                 </script>
 
                 

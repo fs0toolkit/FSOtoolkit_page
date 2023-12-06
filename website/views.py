@@ -228,8 +228,7 @@ def home():
             
             record= list(c.fetchone())
 
-            print(record)
-            print(type(record))
+
             if record:
                 # Unpack the record, assuming it has the expected number of values
                 num, review_type, title, owner,  _, _, _, release_label, rat, review_start_date, review_end_date, primary_tm, sign_off, review_summary ,technical_manager, ra_lead_4g, ra_lead_5g, fs1ta_owner, system_architect, other_mandatory, optional_reviewers, fst, apo, other_optional, comp1, comp2, comp3, comp4, comp5, comp6, comp7,Proj_id = record
@@ -330,7 +329,6 @@ def comment():
             corr_comm = request.form.get('corr_comm')
             agree = request.form.get('agree')
             local_project_id = request.form.get('local_project_id')
-            print("\n Local Project ID:", local_project_id)
             # Insert query
             c.execute("""
                 INSERT INTO comments (
@@ -355,7 +353,7 @@ def comment():
 @views.route('/process_input', methods=['POST'])
 def process_input():
     local_project_id = request.form.get('local_project_id')
-    print("Local Project ID:", local_project_id)
+
     # Process the input or use it as needed
     record2 = []
     heading = ("Project ID", "Page/Slide", "Chapter/Section", "Review Comment", "Seriousness", "Reviewers email id", "Correction Status", "Correction Comments", "Agreed with reviewer (to be updated by the reviewer)")
@@ -368,7 +366,7 @@ def process_input():
     # Retrieve all records from the comments table
     c.execute("SELECT * FROM comments;")
     record2 = list(c.fetchall())
-    print(record2)
+
     # Close the database connection
     conn.close()
 

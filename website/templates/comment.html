@@ -276,112 +276,55 @@
 
     <script>
 
-
-        function filterByProjectId() {
-            var input = document.getElementById('local_project_id').value;
-            var rows = document.getElementsByClassName('project-row');
-    
-            for (var i = 0; i < rows.length; i++) {
-                var projectId = rows[i].getAttribute('data-project-id');
-                if (projectId === input) {
-                    rows[i].style.display = '';
-                } else {
-                    rows[i].style.display = 'none';
-                }
-            }
-        }
-
-
         var summaryCounts = {
             option1: 0,
             option2: 0,
             option3: 0,
             option4: 0
         };
-
-        function updateSummary(option) {
-            var summaryOptionId = "summary1-option" + option;
-
         
+        var summary2Counts = {
+            option5: 0,
+            option6: 0,
+            option7: 0,
+            option8: 0,
+            option9: 0,
+            option10: 0,
+            option11: 0
+        };
+        
+        var notAgreedCount = 0;
+        
+        function updateSummary(option) {
             summaryCounts["option" + option]++;
-
-            
-            for (var i = 1; i <= 4; i++) {
-                document.getElementById("summary1-option" + i).textContent = summaryCounts["option" + i];
-            }
-
-   
-            return false;
+            updateSummaryDisplay("summary1-option", 4, summaryCounts);
         }
-      
-
-            var summaryCounts = {
-                option1: 0,
-                option2: 0,
-                option3: 0,
-                option4: 0
-            };
-
-            var summary2Counts = {
-                option5: 0,
-                option6: 0,
-                option7: 0,
-                option8: 0,
-                option9: 0,
-                option10: 0,
-                option11: 0
-            };
-
-            var notAgreedCount = 0;
-
-            function updateSummary(option) {
-                summaryCounts["option" + option]++;
-                updateSummaryDisplay("summary1-option", 4, summaryCounts);
+        
+        function updateSummary2(optionId) {
+            summary2Counts[optionId]++;
+            document.getElementById(optionId).textContent = summary2Counts[optionId];
+        }
+        
+        function updateCorrectionCount(option) {
+            updateSummary2(option); // Assuming correction count is part of summary2
+        }
+        
+        function updateNotAgreedCount(response) {
+            notAgreedCount += (response === 'yes') ? 1 : -1;
+            document.getElementById("summary2-option11").textContent = notAgreedCount;
+        }
+        
+        function updateSummaryDisplay(baseId, count, counts) {
+            for (var i = 1; i <= count; i++) {
+                document.getElementById(baseId + i).textContent = counts["option" + i];
             }
-
-            function updateSummary2(option) {
-                summary2Counts["option" + option]++;
-                updateSummaryDisplay("summary2-option", 11, summary2Counts);
-            }
-
-            function updateCorrectionCount(option) {
-                updateSummary2(option); // Assuming correction count is part of summary2
-            }
-
-            function updateNotAgreedCount(response) {
-                notAgreedCount += (response === 'yes') ? 1 : -1;
-                document.getElementById("summary2-option11").textContent = notAgreedCount;
-            }
-
-            function updateSummaryDisplay(baseId, count, counts) {
-                for (var i = 1; i <= count; i++) {
-                    document.getElementById(baseId + i).textContent = counts["option" + i];
-                }
-            }
-
-
-
-                    
-                var summary2Counts = {
-                    "summary2-option5": 0,
-                "summary2-option6": 0,
-                "summary2-option7": 0,
-                "summary2-option8": 0,
-                "summary2-option9": 0,
-                "summary2-option10": 0,
-                "summary2-option11": 0
-            };
-
-                function updateSummary2(optionId) {
-                    summary2Counts[optionId]++;
-                document.getElementById(optionId).textContent = summary2Counts[optionId];
-            }
-
-                function handleCorrectionStatusChange() {
-                var selectElement = document.getElementById("correctionStatusSelect");
-                var optionId = selectElement.options[selectElement.selectedIndex].value;
-                updateSummary2(optionId);
-            }
+        }
+        
+        function handleCorrectionStatusChange() {
+            var selectElement = document.getElementById("correctionStatusSelect");
+            var optionId = selectElement.options[selectElement.selectedIndex].value;
+            updateSummary2(optionId);
+        }
 
 
     </script>
