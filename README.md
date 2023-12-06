@@ -40,3 +40,8 @@ Based on the CSV file in the instances folder, you can create three tables. Assu
 
 Import Data:
 Import data from the CSV file into each respective table. Make sure to replace the placeholders with the actual file path.Adjust the table and column names as needed based on your actual CSV file structure.
+
+
+
+![image](https://github.com/fs0toolkit/FSOtoolkit_page/assets/79183768/d9da6fee-b1af-47fc-83ee-4a5b9c293fc9)
+
